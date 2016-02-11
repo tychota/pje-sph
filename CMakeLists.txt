@@ -23,4 +23,13 @@ SET( SPH_SOURCE_FILES
         src/common/particle.cc
         src/common/force.cc)
 
+SET( SPH_TEST_FILES
+        test/unit.cc
+        src/utils/prime.cc
+        src/structure/proximityHash.cc
+        src/common/fluid.cc
+        src/common/particle.cc
+        src/common/force.cc)
+
 ADD_EXECUTABLE( pje_sph ${SPH_SOURCE_FILES})
+ADD_EXECUTABLE( pje_test ${SPH_TEST_FILES})
