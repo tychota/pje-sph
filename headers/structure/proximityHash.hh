@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 #include <vector>
-#include <vector>
+#include <algorithm>
 #include <memory>
 
 #include "common/particle.hh"
@@ -16,8 +16,8 @@ class proximityHash {
 public:
     proximityHash(double l, int64_t n);
     int64_t get(vec3d vec);
-    void add(particle p);
-    void remove(particle p);
+    void add(shared_ptr<particle>  p);
+    void remove(shared_ptr<particle>  p);
     particle query(ino64_t hash);
 
     std::unordered_map<int64_t, listParticle> map;

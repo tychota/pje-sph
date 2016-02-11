@@ -13,11 +13,8 @@ int64_t proximityHash::get(vec3d vec) {
     return  (ap ^ bp ^ cp) % this->n_h;
 }
 
-void proximityHash::add(particle p) {
-    int64_t hash = get(p.curr_pos);
-
-    shared_ptr<particle> ptr;
-    ptr.reset(&p);
+void proximityHash::add(shared_ptr<particle> ptr) {
+    int64_t hash = get(ptr->curr_pos);
 
     // on recupère l'iterateur sur le pointeur
     unordered_map<int64_t, listParticle>::iterator got = map.find(hash);
@@ -30,3 +27,17 @@ void proximityHash::add(particle p) {
     }
 }
 
+void proximityHash::remove(shared_ptr<particle> ptr) {
+    int64_t hash = get(ptr->curr_pos);
+
+    // on recupère l'iterateur sur le pointeur
+    unordered_map<int64_t, listParticle>::iterator got = map.find(hash);
+    if (got == map.end()) {
+        throw std::exception();
+    } else {
+        listParticle bucket = got->second;
+        bucket.erase(std::find(bucket.begin(), bucket.end(), ptr));
+        /*if (bucket.empty())
+            map.erase(got);*/
+    }
+}
