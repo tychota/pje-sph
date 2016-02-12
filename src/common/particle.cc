@@ -5,9 +5,9 @@ vec3d vn = vec3d(0, 0, 0);
 particle::particle(double r,
                    fluid & flu,
                    listForces& f,
-                   vec3d pos = vn,
-                   vec3d spe = vn,
-                   vec3d acc = vn):
+                   vec3d pos,
+                   vec3d spe,
+                   vec3d acc):
         flu(flu),
         rad(r),
         forces(f)
@@ -25,3 +25,5 @@ particle::particle(double r,
     curr_acc = vec3d(mass*acc.v[0], mass*acc.v[1], mass*acc.v[2]);
     next_acc = vec3d(mass*acc.v[0], mass*acc.v[1], mass*acc.v[2]);
 }
+
+particle::particle(double r, fluid &flu, listForces& f) : particle(r, flu, f, vn, vn, vn) { };

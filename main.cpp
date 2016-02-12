@@ -1,14 +1,17 @@
 #include <iostream>
 
+#include "spdlog/spdlog.h"
 
 #include "common/particle.hh"
-#include "common/fluid.hh"
-#include "common/force.hh"
 #include "structure/proximityHash.hh"
-#include "utils/vec3.hh"
 
+namespace spd = spdlog;
 
 using namespace std;
 int main() {
-    return 0;
+    auto console = spd::stdout_logger_mt("console");
+    spd::set_level(spd::level::debug);
+
+    console->info("Bienvenu dans PJE SPH");
+    proximityHash proximityHash1(12, 120);
 }

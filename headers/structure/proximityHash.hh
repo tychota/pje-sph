@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <vector>
+#include <set>
 #include <algorithm>
 #include <memory>
 
@@ -9,10 +9,14 @@
 #include "utils/vec3.hh"
 #include "utils/prime.hh"
 
-typedef std::vector<std::shared_ptr<particle>> listParticle;
+#include "spdlog/spdlog.h"
+namespace spd = spdlog;
+
+typedef std::set<std::shared_ptr<particle>> listParticle;
 
 using namespace std;
 class proximityHash {
+    std::shared_ptr<spdlog::logger> console = spd::get("console");
 public:
     proximityHash(double l, int64_t n);
     int64_t get(vec3d vec);
@@ -29,5 +33,4 @@ private:
     int64_t p1 = 111;
     int64_t p2 = 19349663;
     int64_t p3 = 83492791;
-
 };

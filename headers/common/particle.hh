@@ -9,6 +9,7 @@
 class particle {
 public:
     particle(double r, fluid & flu, listForces& f, vec3d pos, vec3d spe, vec3d acc);
+    particle(double r, fluid & flu, listForces& f);
 
     fluid& flu; // réference vers un fluid
     double rad; // rayon
