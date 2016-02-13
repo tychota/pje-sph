@@ -54,3 +54,7 @@ void AccelerationMap::remove(shared_ptr<Particle> ptr) {
             map.erase(got);*/
     }
 }
+
+Particle AccelerationMap::query(ino64_t hash) {
+
+}

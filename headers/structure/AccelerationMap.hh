@@ -12,9 +12,9 @@
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;
 
-typedef std::set<std::shared_ptr<Particle>> SetParticle;
-
 using namespace std;
+typedef set<shared_ptr<Particle>> SetParticle;
+
 class AccelerationMap {
 public:
     AccelerationMap(double l, int64_t n);
@@ -25,7 +25,7 @@ public:
     std::unordered_map<int64_t, SetParticle> map;
 
 protected:
-    std::shared_ptr<spdlog::logger> console = spd::get("console");
+    shared_ptr<spdlog::logger> console = spd::get("console");
 
 private:
     double l;

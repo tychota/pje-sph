@@ -41,16 +41,12 @@ ADD_LIBRARY( pjeKernel
         src/kernel/KernelBetaSpline.cc
         headers/kernel/KernelBetaSpline.hh)
 
-
-ADD_LIBRARY( pjeUnit
-        test/unit/accelerationmapUnitTest.cc
-        test/unit/fluidUnitTest.cc
-        test/unit/vectorUnitTest.cc)
-
-
-
 ADD_EXECUTABLE( pje_sph main.cpp)
 TARGET_LINK_LIBRARIES( pje_sph pjeCommon pjeAcceleration pjeKernel)
 
-ADD_EXECUTABLE( pje_test test/main.cc)
-TARGET_LINK_LIBRARIES( pje_test pjeCommon pjeAcceleration pjeKernel pjeUnit)
+ADD_EXECUTABLE( pje_test
+        test/main.cc
+        test/unit/accelerationmapUnitTest.cc
+        test/unit/fluidUnitTest.cc
+        test/unit/vec3dUnitTest.cc)
+TARGET_LINK_LIBRARIES( pje_test pjeCommon pjeAcceleration pjeKernel)

@@ -1,4 +1,4 @@
-#include "vectorUnitTest.hh"
+#include "vec3dUnitTest.hh"
 
 TEST_CASE( "Vector related units tests", "[vector]" ) {
     Vec3d v1(0, 1, 2);

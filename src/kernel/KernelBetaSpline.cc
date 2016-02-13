@@ -16,5 +16,7 @@ double KernelBetaSpline::W(double distance) {
         return fW * (2.0 * pow(a, 3));
     } else {
         console->alert("Normed distance should be less than 1.0 since we already select neighbour");
+        throw 0;
     }
 }
+
