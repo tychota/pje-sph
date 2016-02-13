@@ -6,24 +6,24 @@
 
 #include "utils/vec3.hh"
 
-class force {
+class Force {
 public:
-    force(std::function<vec3d (vec3d)> exp);
-    vec3d apply(vec3d pos);
+    Force(std::function<Vec3d (Vec3d)> exp);
+    Vec3d apply(Vec3d pos);
 private:
-    std::function<vec3d (vec3d)> exp;
+    std::function<Vec3d (Vec3d)> exp;
 };
 
-inline std::function<vec3d (vec3d)> uniform(vec3d dir) {
-    return [dir](vec3d pos) {
+inline std::function<Vec3d (Vec3d)> uniform(Vec3d dir) {
+    return [dir](Vec3d pos) {
         return dir;
     };
 };
 
-inline std::function<vec3d (vec3d)> unidir_square(vec3d orig, vec3d dir) {
-    return [orig, dir](vec3d pos){
+inline std::function<Vec3d (Vec3d)> unidir_square(Vec3d orig, Vec3d dir) {
+    return [orig, dir](Vec3d pos){
         return dir / pow((pos - orig).len2(), 2);
     };
 };
 
-typedef std::vector<std::shared_ptr<force>> listForces;
+typedef std::vector<std::shared_ptr<Force>> listForces;

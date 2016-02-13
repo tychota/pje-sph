@@ -11,8 +11,6 @@
  *        as advertised.
  */
 #include "utils/prime.hh"
-
-
 #include <stdlib.h> // rand
 
 
@@ -80,7 +78,7 @@ static int64_t rand_between(int64_t a, int64_t b)
  * The running time should be somewhere around O(k log_3 n).
  *
  */
-bool prime::isprime(int64_t n, int k)
+bool Prime::isprime(int64_t n, int k)
 {
     // Must have ODD n greater than THREE
     if ( n==2 || n==3 ) return true;
@@ -118,7 +116,7 @@ bool prime::isprime(int64_t n, int k)
 /*
  * Return the next prime
  */
-int64_t prime::next(int64_t n) {
-    while (!prime::isprime(++n)) {}
+int64_t Prime::next(int64_t n) {
+    while (!Prime::isprime(++n)) {}
     return n;
 }

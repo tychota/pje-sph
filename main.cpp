@@ -13,5 +13,5 @@ int main() {
     spd::set_level(spd::level::debug);
 
     console->info("Bienvenu dans PJE SPH");
-    proximityHash proximityHash1(12, 120);
+    ProximityHash proximityHash1(12, 40000);
 }

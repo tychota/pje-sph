@@ -6,30 +6,30 @@
 
 #define RAD_MUL = 2
 
-class particle {
+class Particle {
 public:
-    particle(double r, fluid & flu, listForces& f, vec3d pos, vec3d spe, vec3d acc);
-    particle(double r, fluid & flu, listForces& f);
+    Particle(double r, Fluid & flu, listForces& f, Vec3d pos, Vec3d spe, Vec3d acc);
+    Particle(double r, Fluid & flu, listForces& f);
 
-    fluid& flu; // réference vers un fluid
+    Fluid& flu; // réference vers un fluid
     double rad; // rayon
     double mass; // masse de la particule
     double density;
     double pressure;
 
     // Position
-    vec3d curr_pos;
-    vec3d next_pos;
-    vec3d reac_pos;
+    Vec3d curr_pos;
+    Vec3d next_pos;
+    Vec3d reac_pos;
 
     // Speed
-    vec3d curr_spe;
-    vec3d next_spe;
-    vec3d reac_spe;
+    Vec3d curr_spe;
+    Vec3d next_spe;
+    Vec3d reac_spe;
 
     // Accélération
-    vec3d curr_acc;
-    vec3d next_acc;
+    Vec3d curr_acc;
+    Vec3d next_acc;
 
     // Force
     listForces forces;

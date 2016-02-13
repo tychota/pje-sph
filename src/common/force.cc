@@ -1,7 +1,7 @@
 #include "common/force.hh"
 
-force::force(std::function<vec3d (vec3d)> exp): exp(exp) { }
+Force::Force(std::function<Vec3d (Vec3d)> exp): exp(exp) { }
 
-vec3d force::apply(vec3d pos) {
+Vec3d Force::apply(Vec3d pos) {
     return exp(pos);
 }

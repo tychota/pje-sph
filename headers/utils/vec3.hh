@@ -4,32 +4,32 @@
 #include "utils/macros.hh"
 
 template <class T>
-struct vec3 {
+struct Vec3 {
     T v[3];
-    vec3() {
+    Vec3() {
         v[0] = v[1] = v[2] = 0.0;
     }
-    vec3( const vec3<int> &vd) {
+    Vec3( const Vec3<int> &vd) {
         v[0] = vd.v[0];
         v[1] = vd.v[1];
         v[2] = vd.v[2];
     }
-    vec3( const vec3<double> &vd) {
+    Vec3( const Vec3<double> &vd) {
         v[0] = vd.v[0];
         v[1] = vd.v[1];
         v[2] = vd.v[2];
     }
-    vec3( const vec3<float> &vd) {
+    Vec3( const Vec3<float> &vd) {
         v[0] = vd.v[0];
         v[1] = vd.v[1];
         v[2] = vd.v[2];
     }
-    vec3( const vec3<long double> &vd) {
+    Vec3( const Vec3<long double> &vd) {
         v[0] = vd.v[0];
         v[1] = vd.v[1];
         v[2] = vd.v[2];
     }
-    vec3( double x, double y, double z ) {
+    Vec3( double x, double y, double z ) {
         v[0] = x;
         v[1] = y;
         v[2] = z;
@@ -40,40 +40,40 @@ struct vec3 {
     T &operator[](uint idx) {
         return v[idx];
     }
-    vec3 operator+=(const vec3 &vec) {
+    Vec3 operator+=(const Vec3 &vec) {
         v[0]+=vec[0];
         v[1]+=vec[1];
         v[2]+=vec[2];
         return *this;
     }
-    vec3 operator+(const vec3 &vec) const {
-        return vec3( v[0]+vec[0], v[1]+vec[1], v[2]+vec[2] );
+    Vec3 operator+(const Vec3 &vec) const {
+        return Vec3( v[0]+vec[0], v[1]+vec[1], v[2]+vec[2] );
     }
-    vec3 operator-(const vec3 &vec) const {
-        return vec3( v[0]-vec[0], v[1]-vec[1], v[2]-vec[2] );
+    Vec3 operator-(const Vec3 &vec) const {
+        return Vec3( v[0]-vec[0], v[1]-vec[1], v[2]-vec[2] );
     }
-    vec3 operator*=(double s) {
+    Vec3 operator*=(double s) {
         v[0] *= s;
         v[1] *= s;
         v[2] *= s;
         return *this;
     }
-    vec3 operator^(const vec3 &vec) const {
-        return vec3(v[1]*vec[2]-v[2]*vec[1],v[2]*vec[0]-v[0]*vec[2],v[0]*vec[1]-v[1]*vec[0]);
+    Vec3 operator^(const Vec3 &vec) const {
+        return Vec3(v[1]*vec[2]-v[2]*vec[1],v[2]*vec[0]-v[0]*vec[2],v[0]*vec[1]-v[1]*vec[0]);
     }
-    vec3 operator-=(const vec3 &vec) {
+    Vec3 operator-=(const Vec3 &vec) {
         v[0] -= vec[0];
         v[1] -= vec[1];
         v[2] -= vec[2];
         return *this;
     }
-    vec3 operator*(T s) const {
-        return vec3( s*v[0], s*v[1], s*v[2] );
+    Vec3 operator*(T s) const {
+        return Vec3( s*v[0], s*v[1], s*v[2] );
     }
-    vec3 operator/(T s) const {
-        return vec3( v[0]/s, v[1]/s, v[2]/s );
+    Vec3 operator/(T s) const {
+        return Vec3( v[0]/s, v[1]/s, v[2]/s );
     }
-    T operator*(vec3<T> vec) const {
+    T operator*(Vec3<T> vec) const {
         return v[0]*vec[0]+v[1]*vec[1]+v[2]*vec[2];
     }
     T len2() const {
@@ -82,8 +82,8 @@ struct vec3 {
     T len() const {
         return sqrtf(len2());
     }
-    vec3 normal() const {
-        vec3 copy = *this;
+    Vec3 normal() const {
+        Vec3 copy = *this;
         copy.normalize();
         return copy;
     }
@@ -98,10 +98,10 @@ struct vec3 {
     }
 };
 
-template <class T> static inline vec3<T> operator*(double s, const vec3<T> &vec) {
+template <class T> static inline Vec3<T> operator*(double s, const Vec3<T> &vec) {
     return vec*s;
 }
 
-typedef vec3<float>	    vec3f;
-typedef vec3<double>	vec3d;
-typedef vec3<int>		vec3i;
+typedef Vec3<float>	    Vec3f;
+typedef Vec3<double>	Vec3d;
+typedef Vec3<int>		Vec3i;

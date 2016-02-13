@@ -12,19 +12,20 @@
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;
 
-typedef std::set<std::shared_ptr<particle>> listParticle;
+typedef std::set<std::shared_ptr<Particle>> SetParticle;
 
 using namespace std;
-class proximityHash {
-    std::shared_ptr<spdlog::logger> console = spd::get("console");
+class ProximityHash {
 public:
-    proximityHash(double l, int64_t n);
-    int64_t get(vec3d vec);
-    void add(shared_ptr<particle>  p);
-    void remove(shared_ptr<particle>  p);
-    particle query(ino64_t hash);
+    ProximityHash(double l, int64_t n);
+    int64_t get(Vec3d vec);
+    void add(shared_ptr<Particle>  p);
+    void remove(shared_ptr<Particle>  p);
+    Particle query(ino64_t hash);
+    std::unordered_map<int64_t, SetParticle> map;
 
-    std::unordered_map<int64_t, listParticle> map;
+protected:
+    std::shared_ptr<spdlog::logger> console = spd::get("console");
 
 private:
     double l;

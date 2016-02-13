@@ -8,6 +8,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # FIND_PACKAGE ( Boost ${MINIMUM_BOOST_VERSION} REQUIRED )
 
+# FIND_PACKAGE(VTK)
+# INCLUDE(${VTK_USE_FILE})
+
+FIND_PACKAGE(HDF5 REQUIRED)
+
 INCLUDE_DIRECTORIES (
         ${Boost_INCLUDE_DIR}
         vendors
@@ -19,7 +24,8 @@ SET( SPH_SOURCE_FILES
         src/structure/proximityHash.cc
         src/common/fluid.cc
         src/common/particle.cc
-        src/common/force.cc)
+        src/common/force.cc
+        src/kernels/kernel.cc)
 
 SET( SPH_TEST_FILES
         test/unit.cc

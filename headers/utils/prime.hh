@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <math.h>
 
-class prime {
+class Prime {
 public:
     /*
      * Accuracy parameter `k´ of the Miller-Rabin algorithm.
