@@ -4,36 +4,31 @@
 namespace spd = spdlog;
 
 #include "utils/Vec3.hh"
-
+#include "exception/NotImplementedException.hh"
 
 class Kernel {
 public:
-    Kernel(double smoothingLenght);
-    virtual ~Kernel();
+    Kernel(double smoothingLenght);;
+    virtual ~Kernel()= 0;
 
-    /** Calculates the kernel value at the given distance. */
-    virtual double W(double distance) const = 0;
-    virtual double W(double h, double distance) const = 0;
+    virtual double W(double distance);;
+    virtual double W(double h, double distance);;
 
-    /** Calculates the kernel derivative at the given distance using a variable h value */
-    virtual Vec3d gradiant(double distance, const Vec3d& distanceVector) const = 0;
-    virtual Vec3d gradiant(double h, double distance, const Vec3d& distanceVector) const = 0;
+    virtual Vec3d gradW(double distance, const Vec3d& distanceVector);;
+    virtual Vec3d gradW(double h, double distance, const Vec3d& distanceVector);;
 
-    /** Calculates the kernel laplacian at the given distance using a variable h value */
-    virtual double laplacian(double distance, const Vec3d& distanceVector) const = 0;
-    virtual double laplacian(double h, double distance, const Vec3d& distanceVector) const = 0;
+    virtual double laplacian(double distance, const Vec3d& distanceVector);;
+    virtual double laplacian(double h, double distance, const Vec3d& distanceVector);;
 
-    /** return the multiplier between smoothing length and max cutoff distance */
-    virtual double getDilationFactor() const { return 2.0; }
+    virtual double getDilationFactor();
 
-    /** return the maximum distance at which this kernel is non zero */
-    virtual double maxDistance() const = 0;
+    virtual double maxDistance();;
 
 protected:
     const double smoothingLength;
     std::shared_ptr<spdlog::logger> console = spd::get("console");
 
 private:
-    Kernel& operator=(const Kernel& non);
+    virtual Kernel& operator=(const Kernel& non) = 0;
 };
 
