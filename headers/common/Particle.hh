@@ -1,8 +1,8 @@
 #pragma once
 
-#include "utils/vec3.hh"
-#include "common/fluid.hh"
-#include "common/force.hh"
+#include "utils/Vec3.hh"
+#include "common/Fluid.hh"
+#include "common/Force.hh"
 
 #define RAD_MUL = 2
 

@@ -5,9 +5,9 @@
 #include <algorithm>
 #include <memory>
 
-#include "common/particle.hh"
-#include "utils/vec3.hh"
-#include "utils/prime.hh"
+#include "common/Particle.hh"
+#include "utils/Vec3.hh"
+#include "utils/Prime.hh"
 
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;
@@ -15,9 +15,9 @@ namespace spd = spdlog;
 typedef std::set<std::shared_ptr<Particle>> SetParticle;
 
 using namespace std;
-class ProximityHash {
+class AccelerationMap {
 public:
-    ProximityHash(double l, int64_t n);
+    AccelerationMap(double l, int64_t n);
     int64_t get(Vec3d vec);
     void add(shared_ptr<Particle>  p);
     void remove(shared_ptr<Particle>  p);

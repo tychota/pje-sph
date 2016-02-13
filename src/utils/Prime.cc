@@ -10,7 +10,7 @@
  *        challenge.  The code has big room for improvements, but it does work
  *        as advertised.
  */
-#include "utils/prime.hh"
+#include "utils/Prime.hh"
 #include <stdlib.h> // rand
 
 

@@ -2,8 +2,8 @@
 
 #include "spdlog/spdlog.h"
 
-#include "common/particle.hh"
-#include "structure/proximityHash.hh"
+#include "common/Particle.hh"
+#include "structure/AccelerationMap.hh"
 
 namespace spd = spdlog;
 
@@ -13,5 +13,5 @@ int main() {
     spd::set_level(spd::level::debug);
 
     console->info("Bienvenu dans PJE SPH");
-    ProximityHash proximityHash1(12, 40000);
+    AccelerationMap proximityHash1(12, 40000);
 }

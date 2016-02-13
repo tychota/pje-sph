@@ -15,25 +15,42 @@ FIND_PACKAGE(HDF5 REQUIRED)
 
 INCLUDE_DIRECTORIES (
         ${Boost_INCLUDE_DIR}
+        headers
         vendors
-        headers)
+        )
 
-SET( SPH_SOURCE_FILES
-        main.cpp
-        src/utils/prime.cc
-        src/structure/proximityHash.cc
-        src/common/fluid.cc
-        src/common/particle.cc
-        src/common/force.cc
-        src/kernels/kernel.cc)
+ADD_LIBRARY( pjeAcceleration
+        src/utils/Prime.cc
+        headers/utils/Prime.hh
+        src/structure/AccelerationMap.cc
+        headers/structure/AccelerationMap.hh)
 
-SET( SPH_TEST_FILES
-        test/unit.cc
-        src/utils/prime.cc
-        src/structure/proximityHash.cc
-        src/common/fluid.cc
-        src/common/particle.cc
-        src/common/force.cc)
+ADD_LIBRARY( pjeCommon
+        headers/utils/macros.hh
+        headers/utils/Vec3.hh
+        src/common/Fluid.cc
+        headers/common/Fluid.hh
+        src/common/Particle.cc
+        headers/common/Particle.hh
+        src/common/Force.cc
+        headers/common/Force.hh)
 
-ADD_EXECUTABLE( pje_sph ${SPH_SOURCE_FILES})
-ADD_EXECUTABLE( pje_test ${SPH_TEST_FILES})
+ADD_LIBRARY( pjeKernel
+        src/kernel/Kernel.cc
+        headers/kernel/Kernel.hh
+        src/kernel/KernelBetaSpline.cc
+        headers/kernel/KernelBetaSpline.hh)
+
+
+ADD_LIBRARY( pjeUnit
+        test/unit/accelerationmapUnitTest.cc
+        test/unit/fluidUnitTest.cc
+        test/unit/vectorUnitTest.cc)
+
+
+
+ADD_EXECUTABLE( pje_sph main.cpp)
+TARGET_LINK_LIBRARIES( pje_sph pjeCommon pjeAcceleration pjeKernel)
+
+ADD_EXECUTABLE( pje_test test/main.cc)
+TARGET_LINK_LIBRARIES( pje_test pjeCommon pjeAcceleration pjeKernel pjeUnit)

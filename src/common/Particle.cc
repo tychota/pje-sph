@@ -1,4 +1,4 @@
-#include "common/particle.hh"
+#include "common/Particle.hh"
 
 Vec3d vn = Vec3d(0, 0, 0);
 

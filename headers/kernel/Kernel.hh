@@ -1,6 +1,10 @@
 #pragma once
 
-#include "utils/vec3.hh"
+#include "spdlog/spdlog.h"
+namespace spd = spdlog;
+
+#include "utils/Vec3.hh"
+
 
 class Kernel {
 public:
@@ -8,10 +12,8 @@ public:
     virtual ~Kernel();
 
     /** Calculates the kernel value at the given distance. */
-    virtual double call(double distance) const = 0;
-
-    /** Calculates the kernel value at the given distance using a variable h value */
-    virtual double call(double h, double distance) const = 0;
+    virtual double W(double distance) const = 0;
+    virtual double W(double h, double distance) const = 0;
 
     /** Calculates the kernel derivative at the given distance using a variable h value */
     virtual Vec3d gradiant(double distance, const Vec3d& distanceVector) const = 0;
@@ -29,6 +31,7 @@ public:
 
 protected:
     const double smoothingLength;
+    std::shared_ptr<spdlog::logger> console = spd::get("console");
 
 private:
     Kernel& operator=(const Kernel& non);

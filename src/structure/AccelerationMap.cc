@@ -1,6 +1,6 @@
-#include "structure/proximityHash.hh"
+#include "structure/AccelerationMap.hh"
 
-ProximityHash::ProximityHash(double l, int64_t n): l(l), n(n) {
+AccelerationMap::AccelerationMap(double l, int64_t n): l(l), n(n) {
     console->debug("<HASH> Construct a new acceleration structure");
     console->debug("<HASH>  * --> number of particles : {} ", n);
     console->debug("<HASH>  * --> size of a grid element: {} ", l);
@@ -15,7 +15,7 @@ ProximityHash::ProximityHash(double l, int64_t n): l(l), n(n) {
     map.reserve(space);
 }
 
-int64_t ProximityHash::get(Vec3d vec) {
+int64_t AccelerationMap::get(Vec3d vec) {
     console->debug("<HASH> Computing ap, bp, cp and hashes");
     int64_t ap = (int64_t) floor(vec.v[0]/this->l) * this->p1;
     int64_t bp = (int64_t) floor(vec.v[1]/this->l) * this->p2;
@@ -26,7 +26,7 @@ int64_t ProximityHash::get(Vec3d vec) {
     return hash;
 }
 
-void ProximityHash::add(shared_ptr<Particle> ptr) {
+void AccelerationMap::add(shared_ptr<Particle> ptr) {
     int64_t hash = get(ptr->curr_pos);
 
     // on recupère l'iterateur sur le pointeur
@@ -40,7 +40,7 @@ void ProximityHash::add(shared_ptr<Particle> ptr) {
     }
 }
 
-void ProximityHash::remove(shared_ptr<Particle> ptr) {
+void AccelerationMap::remove(shared_ptr<Particle> ptr) {
     int64_t hash = get(ptr->curr_pos);
 
     // on recupère l'iterateur sur le pointeur

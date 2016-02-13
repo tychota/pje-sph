@@ -1,4 +1,4 @@
-#include "common/fluid.hh"
+#include "common/Fluid.hh"
 
 Fluid::Fluid(double rho0, double b, double mu, double sigma, double k, double l, double cr)
         : rho0(rho0),

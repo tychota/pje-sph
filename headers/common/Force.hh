@@ -4,7 +4,7 @@
 #include <functional>
 #include <memory>
 
-#include "utils/vec3.hh"
+#include "utils/Vec3.hh"
 
 class Force {
 public:
