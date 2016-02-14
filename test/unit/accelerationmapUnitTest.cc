@@ -11,10 +11,11 @@ TEST_CASE("Proximity Hash related units tests", "[hash]") {
     }
     SECTION("Particles can be added") {
         Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
-        shared_ptr<Force> gravity = make_shared<Force>(uniform(Vec3d(0, 0, -9.8)));
+        shared_ptr<Force> gravity = make_shared<Force>(ForceExtern(Vec3d(0, 0, -9.8)));
         listForces forces{gravity};
-        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, fluid1, forces);
-        shared_ptr<Particle> p2 = make_shared<Particle>(0.1, fluid1, forces);
+        mapKernel mk{{"density", KernelPoly6(3)}};
+        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, fluid1, forces, mk);
+        shared_ptr<Particle> p2 = make_shared<Particle>(0.1, fluid1, forces, mk);
         p1->curr_pos = Vec3d(0, 0, 0);
         p2->curr_pos = Vec3d(0.1, 0, 0);
         hash1.add(p1);

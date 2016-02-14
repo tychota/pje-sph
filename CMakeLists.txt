@@ -16,8 +16,7 @@ FIND_PACKAGE(HDF5 REQUIRED)
 INCLUDE_DIRECTORIES(
         ${Boost_INCLUDE_DIR}
         headers
-        vendors
-)
+        vendors)
 
 ADD_LIBRARY(PJEAcceleration
         src/utils/Prime.cc
@@ -35,11 +34,17 @@ ADD_LIBRARY(PJECommon
 
 ADD_LIBRARY(PJEForce
         src/force/Force.cc
-        headers/force/Force.hh)
-
-ADD_LIBRARY(PJEState
-        src/state/State.cc
-        headers/state/State.hh)
+        headers/force/Force.hh
+        src/force/ForceExtern.cc
+        headers/force/ForceExtern.hh
+        src/force/ForceIntern.cc
+        headers/force/ForceIntern.hh
+        src/force/ForceInternPressure.cc
+        headers/force/ForceInternPressure.hh
+        src/force/ForceInternSurfaceTension.cc
+        headers/force/ForceInternSurfaceTension.hh
+        src/force/ForceInternViscosity.cc
+        headers/force/ForceInternViscosity.hh)
 
 ADD_LIBRARY(PJESolid
         src/solid/Solid.cc
@@ -48,37 +53,22 @@ ADD_LIBRARY(PJESolid
 ADD_LIBRARY(PJEKernel
         src/kernel/Kernel.cc
         headers/kernel/Kernel.hh
-        src/kernel/KernelBox.cc
-        headers/kernel/KernelBox.hh
-        src/kernel/KernelCusp.cc
-        headers/kernel/KernelCusp.hh
-        src/kernel/KernelGaussian.cc
-        headers/kernel/KernelGaussian.hh
         src/kernel/KernelPoly6.cc
         headers/kernel/KernelPoly6.hh
-        src/kernel/KernelQuadratic.cc
-        headers/kernel/KernelQuadratic.hh
+        src/kernel/KernelSine.cc
+        headers/kernel/KernelSine.hh
         src/kernel/KernelSpiky.cc
         headers/kernel/KernelSpiky.hh
-        src/kernel/KernelSpline3rdO.cc
-        headers/kernel/KernelSpline3rdO.hh
-        src/kernel/KernelSpline5rdO.cc
-        headers/kernel/KernelSpline5rdO.hh
-        src/kernel/KernelSplineBeta.cc
-        headers/kernel/KernelSplineBeta.hh
-        src/kernel/KernelSplineS35.cc
-        headers/kernel/KernelSplineS35.hh
-        src/kernel/KernelWendland.cc
-        headers/kernel/KernelWendland.hh)
+        src/kernel/KernelViscosity.cc
+        headers/kernel/KernelViscosity.hh)
 
 
 ADD_LIBRARY(PJEException
         src/exception/NotImplementedException.cc
-        headers/exception/NotImplementedException.hh
-        )
+        headers/exception/NotImplementedException.hh)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph PJEException PJECommon PJEForce PJEState PJEAcceleration PJESolid PJEKernel)
+TARGET_LINK_LIBRARIES(sph PJEException PJECommon PJEForce PJEAcceleration PJESolid PJEKernel)
 
 ADD_EXECUTABLE(tests
         test/main.cc
@@ -87,4 +77,4 @@ ADD_EXECUTABLE(tests
         test/unit/vec3dUnitTest.cc
         test/unit/notimplementedexceptionUnitTest.cc
         test/unit/kernelUnitTest.cc)
-TARGET_LINK_LIBRARIES(tests PJEException PJECommon PJEForce PJEState PJEAcceleration PJESolid PJEKernel)
+TARGET_LINK_LIBRARIES(tests PJEException PJECommon PJEForce PJEAcceleration PJESolid PJEKernel)

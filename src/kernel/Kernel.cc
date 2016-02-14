@@ -13,7 +13,7 @@ Vec3d Kernel::gradW(double distance, const Vec3d& distanceVector) {
     throw NotImplementedException();
 }
 
-double Kernel::laplacian(double distance, const Vec3d& distanceVector) {
+double Kernel::laplacianW(double distance, const Vec3d &distanceVector) {
     throw NotImplementedException();
 }
 

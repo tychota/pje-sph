@@ -16,15 +16,17 @@ public:
     virtual Vec3d gradW(double distance, const Vec3d& distanceVector);
     virtual Vec3d gradW(Vec3d r){ return  gradW(r.len(), r); };
 
-    virtual double laplacian(double distance, const Vec3d& distanceVector);
+    virtual double laplacianW(double distance, const Vec3d &distanceVector);
+    virtual double laplacianW(const Vec3d r){ return  laplacianW(r.len(), r); };
 
     virtual double getDilationFactor();
 
     virtual double maxDistance();
 
 protected:
-    const double smoothingLength;
+    double smoothingLength;
     std::shared_ptr<spdlog::logger> console = spd::get("console");
 
 };
 
+typedef std::map<const char*, Kernel> mapKernel;
