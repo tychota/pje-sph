@@ -9,10 +9,13 @@ public:
     KernelQuadratic& operator=(const KernelQuadratic& non) = delete;
 
     virtual double W(double distance);
-    virtual Vec3d gradW(double distance, const Vec3d& distanceVector);
+    virtual double W(Vec3d r){ return  W(r.len()); };
 
-    /** Calculates the kernel laplacian at the given distance using a variable h value */
-    virtual double laplacian(double distance, const Vec3d& distanceVector) const = 0;
+    virtual Vec3d gradW(double distance, const Vec3d& distanceVector);
+    virtual Vec3d gradW(Vec3d r){ return  gradW(r.len(), r); };
+
+    virtual double laplacian(double distance, const Vec3d& distanceVector);
+
     virtual double getDilationFactor() const { return 2.0; }
     virtual double maxDistance();
 

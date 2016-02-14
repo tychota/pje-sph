@@ -12,7 +12,7 @@ double KernelGaussian::W(double distance) {
     if (normalizedDistance < 5) {
         return factorW * exp( - normalizedDistance * normalizedDistance );
     } else {
-        console->alert("Normalized distance should be less than 1.0 since we already select neighbour");
+        console->warn("Normalized distance should be less than 5.0 since we already select neighbour");
         return 0.0;
     }
 }
@@ -23,16 +23,14 @@ Vec3d KernelGaussian::gradW(double distance, const Vec3d& distanceVector) {
         return factorGradW * exp( - normalizedDistance * normalizedDistance ) * distanceVector;
     } else {
         if (normalizedDistance > 1) {
-            console->alert("Normalized distance should be less than 1.0 since we already select neighbour");
+            console->warn("Normalized distance should be less than 5.0 since we already select neighbour");
         } else if (normalizedDistance == 0) {
-            console->alert("Normalized distance shouldn't be null");
+            console->warn("Normalized distance shouldn't be null");
         }
         return Vec3d(0, 0, 0);
     }
 }
 
-double KernelGaussian::maxDistance() {
-    return 5 * smoothingLength;
-}
+double KernelGaussian::laplacian(double distance, const Vec3d& distanceVector) { throw NotImplementedException(); }
 
-
+double KernelGaussian::maxDistance() { return 5 * smoothingLength; }

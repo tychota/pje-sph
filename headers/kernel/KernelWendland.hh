@@ -1,12 +1,12 @@
-#pragma once
+#pragma  once
 
 #include "kernel/Kernel.hh"
 #include "utils/macros.hh"
 
-class KernelGaussian: public Kernel {
-public:
-    KernelGaussian(double smoothingLength);
-    KernelGaussian& operator=(const KernelGaussian& non) = delete;
+class KernelWendland : public Kernel {
+  public:
+    KernelWendland(double smoothingLength);
+    KernelWendland & operator=(const KernelWendland & non) = delete;
 
     virtual double W(double distance);
     virtual double W(Vec3d r){ return  W(r.len()); };
@@ -19,10 +19,9 @@ public:
     virtual double getDilationFactor() const { return 2.0; }
     virtual double maxDistance();
 
-private:
+  private:
     double norme;
     double reverseSmoothingLenght;
     double factorW;
     double factorGradW;
 };
-

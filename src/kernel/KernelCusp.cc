@@ -13,7 +13,7 @@ double KernelCusp::W(double distance) {
         auto diffDistance = 1.0 - normalizedDistance;
         return factorW * diffDistance * diffDistance;
     } else {
-        console->alert("Normalized distance should be less than 1.0 since we already select neighbour");
+        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return 0.0;
     }
 }
@@ -25,12 +25,13 @@ Vec3d KernelCusp::gradW(double distance, const Vec3d& distanceVector) {
         return (factorGradW * diffDistance / distance) * distanceVector;
     } else {
         if (normalizedDistance > 1) {
-            console->alert("Normalized distance should be less than 1.0 since we already select neighbour");
+            console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         } else if (normalizedDistance == 0) {
-            console->alert("Normalized distance shouldn't be null");
+            console->warn("Normalized distance shouldn't be null");
         }
         return Vec3d(0, 0, 0);
     }
 }
 
 
+double KernelCusp::laplacian(double distance, const Vec3d& distanceVector) { throw NotImplementedException();}

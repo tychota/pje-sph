@@ -13,53 +13,78 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 FIND_PACKAGE(HDF5 REQUIRED)
 
-INCLUDE_DIRECTORIES (
+INCLUDE_DIRECTORIES(
         ${Boost_INCLUDE_DIR}
         headers
         vendors
-        )
+)
 
-ADD_LIBRARY( PJEAcceleration
+ADD_LIBRARY(PJEAcceleration
         src/utils/Prime.cc
         headers/utils/Prime.hh
         src/structure/AccelerationMap.cc
         headers/structure/AccelerationMap.hh)
 
-ADD_LIBRARY( PJECommon
+ADD_LIBRARY(PJECommon
         headers/utils/macros.hh
         headers/utils/Vec3.hh
         src/common/Fluid.cc
         headers/common/Fluid.hh
         src/common/Particle.cc
-        headers/common/Particle.hh
-        src/common/Force.cc
-        headers/common/Force.hh)
+        headers/common/Particle.hh)
 
-ADD_LIBRARY( PJEKernel
+ADD_LIBRARY(PJEForce
+        src/force/Force.cc
+        headers/force/Force.hh)
+
+ADD_LIBRARY(PJEState
+        src/state/State.cc
+        headers/state/State.hh)
+
+ADD_LIBRARY(PJESolid
+        src/solid/Solid.cc
+        headers/solid/Solid.hh)
+
+ADD_LIBRARY(PJEKernel
         src/kernel/Kernel.cc
         headers/kernel/Kernel.hh
-        src/kernel/KernelBetaSpline.cc
-        headers/kernel/KernelBetaSpline.hh
         src/kernel/KernelBox.cc
         headers/kernel/KernelBox.hh
         src/kernel/KernelCusp.cc
         headers/kernel/KernelCusp.hh
         src/kernel/KernelGaussian.cc
         headers/kernel/KernelGaussian.hh
+        src/kernel/KernelPoly6.cc
+        headers/kernel/KernelPoly6.hh
         src/kernel/KernelQuadratic.cc
-        headers/kernel/KernelQuadratic.hh)
+        headers/kernel/KernelQuadratic.hh
+        src/kernel/KernelSpiky.cc
+        headers/kernel/KernelSpiky.hh
+        src/kernel/KernelSpline3rdO.cc
+        headers/kernel/KernelSpline3rdO.hh
+        src/kernel/KernelSpline5rdO.cc
+        headers/kernel/KernelSpline5rdO.hh
+        src/kernel/KernelSplineBeta.cc
+        headers/kernel/KernelSplineBeta.hh
+        src/kernel/KernelSplineS35.cc
+        headers/kernel/KernelSplineS35.hh
+        src/kernel/KernelWendland.cc
+        headers/kernel/KernelWendland.hh)
 
-ADD_LIBRARY( PJEException
+
+ADD_LIBRARY(PJEException
         src/exception/NotImplementedException.cc
         headers/exception/NotImplementedException.hh
         )
 
-ADD_EXECUTABLE( sph main.cpp)
-TARGET_LINK_LIBRARIES( sph PJEException PJECommon PJEAcceleration PJEKernel )
+ADD_EXECUTABLE(sph main.cpp)
+TARGET_LINK_LIBRARIES(sph PJEException PJECommon PJEForce PJEState PJEAcceleration PJESolid PJEKernel)
 
-ADD_EXECUTABLE( tests
+ADD_EXECUTABLE(tests
         test/main.cc
         test/unit/accelerationmapUnitTest.cc
         test/unit/fluidUnitTest.cc
-        test/unit/vec3dUnitTest.cc test/unit/notimplementedexceptionUnitTest.cc test/unit/notimplementedexceptionUnitTest.hh)
-TARGET_LINK_LIBRARIES( tests PJEException PJECommon PJEAcceleration PJEKernel )
+        test/unit/vec3dUnitTest.cc
+        test/unit/notimplementedexceptionUnitTest.cc
+        test/unit/kernelUnitTest.cc)
+TARGET_LINK_LIBRARIES(tests PJEException PJECommon PJEForce PJEState PJEAcceleration PJESolid PJEKernel)

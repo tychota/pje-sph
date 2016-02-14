@@ -1,4 +1,4 @@
-#include "common/Force.hh"
+#include "force/Force.hh"
 
 Force::Force(std::function<Vec3d (Vec3d)> exp): exp(exp) { }
 

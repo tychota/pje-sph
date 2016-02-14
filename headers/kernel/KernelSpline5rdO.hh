@@ -3,10 +3,10 @@
 #include "kernel/Kernel.hh"
 #include "utils/macros.hh"
 
-class KernelGaussian: public Kernel {
+class KernelSpline5rdO: public Kernel {
 public:
-    KernelGaussian(double smoothingLength);
-    KernelGaussian& operator=(const KernelGaussian& non) = delete;
+    KernelSpline5rdO(double smoothingLength);
+    KernelSpline5rdO& operator=(const KernelSpline5rdO& non) = delete;
 
     virtual double W(double distance);
     virtual double W(Vec3d r){ return  W(r.len()); };
@@ -24,5 +24,6 @@ private:
     double reverseSmoothingLenght;
     double factorW;
     double factorGradW;
+
 };
 

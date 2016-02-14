@@ -3,10 +3,10 @@
 #include "kernel/Kernel.hh"
 #include "utils/macros.hh"
 
-class KernelGaussian: public Kernel {
+class KernelSpiky: public Kernel {
 public:
-    KernelGaussian(double smoothingLength);
-    KernelGaussian& operator=(const KernelGaussian& non) = delete;
+    KernelSpiky(double smoothingLength);
+    KernelSpiky& operator=(const KernelSpiky& non) = delete;
 
     virtual double W(double distance);
     virtual double W(Vec3d r){ return  W(r.len()); };
