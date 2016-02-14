@@ -6,7 +6,6 @@
 class KernelViscosity : public Kernel {
   public:
     KernelViscosity(double smoothingLength);
-    KernelViscosity & operator=(const KernelViscosity & non) = delete;
 
     virtual double W(double distance);
     virtual double W(Vec3d r){ return  W(r.len()); };

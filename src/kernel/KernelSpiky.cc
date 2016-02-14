@@ -39,5 +39,5 @@ double KernelSpiky::laplacianW(double distance, const Vec3d &distanceVector) {
 }
 
 double KernelSpiky::maxDistance() {
-    return 1 * smoothingLength;
+    return 1.0 * smoothingLength;
 }

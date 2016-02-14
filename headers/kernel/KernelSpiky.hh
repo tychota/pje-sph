@@ -6,7 +6,6 @@
 class KernelSpiky: public Kernel {
 public:
     KernelSpiky(double smoothingLength);
-    KernelSpiky& operator=(const KernelSpiky& non) = delete;
 
     virtual double W(double distance);
     virtual double W(Vec3d r){ return  W(r.len()); };

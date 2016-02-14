@@ -3,5 +3,6 @@
 
 #include "utils/Vec3.hh"
 #include "common/Particle.hh"
+#include <common/Force.hh>
 #include "structure/AccelerationMap.hh"
-#include <force/ForceExtern.hh>
+

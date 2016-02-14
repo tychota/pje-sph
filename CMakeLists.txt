@@ -30,21 +30,9 @@ ADD_LIBRARY(PJECommon
         src/common/Fluid.cc
         headers/common/Fluid.hh
         src/common/Particle.cc
-        headers/common/Particle.hh)
-
-ADD_LIBRARY(PJEForce
-        src/force/Force.cc
-        headers/force/Force.hh
-        src/force/ForceExtern.cc
-        headers/force/ForceExtern.hh
-        src/force/ForceIntern.cc
-        headers/force/ForceIntern.hh
-        src/force/ForceInternPressure.cc
-        headers/force/ForceInternPressure.hh
-        src/force/ForceInternSurfaceTension.cc
-        headers/force/ForceInternSurfaceTension.hh
-        src/force/ForceInternViscosity.cc
-        headers/force/ForceInternViscosity.hh)
+        headers/common/Particle.hh
+        src/common/Force.cc
+        headers/common/Force.hh)
 
 ADD_LIBRARY(PJESolid
         src/solid/Solid.cc
@@ -68,13 +56,13 @@ ADD_LIBRARY(PJEException
         headers/exception/NotImplementedException.hh)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph PJEException PJECommon PJEForce PJEAcceleration PJESolid PJEKernel)
+TARGET_LINK_LIBRARIES(sph PJEException PJECommon PJEAcceleration PJESolid PJEKernel)
 
 ADD_EXECUTABLE(tests
         test/main.cc
-        test/unit/accelerationmapUnitTest.cc
-        test/unit/fluidUnitTest.cc
-        test/unit/vec3dUnitTest.cc
-        test/unit/notimplementedexceptionUnitTest.cc
-        test/unit/kernelUnitTest.cc)
-TARGET_LINK_LIBRARIES(tests PJEException PJECommon PJEForce PJEAcceleration PJESolid PJEKernel)
+        test/unit/accelTest.cc
+        test/unit/fluidTest.cc
+        test/unit/vec3Test.cc
+        test/unit/exceptionTest.cc
+        test/unit/kernelTest.cc)
+TARGET_LINK_LIBRARIES(tests PJEException PJECommon PJEAcceleration PJESolid PJEKernel)
