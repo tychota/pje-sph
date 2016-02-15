@@ -37,6 +37,8 @@ Particle::Particle(double r,
 
     curr_acc = Vec3d(mass*acc.v[0], mass*acc.v[1], mass*acc.v[2]);
     next_acc = Vec3d(mass*acc.v[0], mass*acc.v[1], mass*acc.v[2]);
+
+    density = flu.rho0;
 }
 
 Particle::Particle(double r,
@@ -56,18 +58,19 @@ void Particle::updateField(std::vector<std::shared_ptr<Particle>> neighb) {
     double W;
     Vec3d dist;
     for (auto other: neighb) {
-        dist = curr_pos - other->curr_pos;
-        W = fieldKernel.W(dist);
+        dist = this->curr_pos - other->curr_pos;
+        W = this->fieldKernel.W(dist);
         dens += other->mass * W;
         colFactor = other->mass / other->density;
         col += colFactor * W;
-        colGrad += colFactor * fieldKernel.gradW(dist);
+        colGrad += colFactor * this->fieldKernel.gradW(dist);
+        colLapl += colFactor * this->fieldKernel.laplacianW(dist);
     }
-    density =  dens;
-    colour = col;
-    colourDirection = colGrad;
-    colourLaplacian = colLapl;
-    pressure = (density - flu.rho0) * flu.k;
+    this->density =  dens;
+    this->colour = col;
+    this->colourDirection = colGrad;
+    this->colourLaplacian = colLapl;
+    this->pressure = (this->density - this->flu.rho0) * this->flu.k;
 }
 
 void Particle::updateForce(std::vector<std::shared_ptr<Particle>> neighb) {
@@ -76,30 +79,32 @@ void Particle::updateForce(std::vector<std::shared_ptr<Particle>> neighb) {
     Vec3d tempViscosityForce = Vec3d();
     Vec3d tempSurfaceTensionForce =  Vec3d();
     for (auto other: neighb) {
-        dist = curr_pos - other->curr_pos;
-        auto mj = mass;
-        auto rho_j = density;
+        dist = this->curr_pos - other->curr_pos;
+        auto mass_j = this->mass;
+        auto rho_j = this->density;
         auto rho_i = other->density;
-        auto p_j = pressure;
-        auto p_i = other->pressure;
-        auto u_j = curr_spe;
-        auto u_i = other->curr_spe;
+        auto pos_j = this->pressure;
+        auto pos_i = other->pressure;
+        auto spe_j = this->curr_spe;
+        auto spe_i = other->curr_spe;
 
-        auto pressureFact = - mj * rho_j *  ((p_i + p_j) / ( 2 * rho_i * rho_j));
-        auto viscosityVectFact = - mj * rho_j *  ((u_i + u_j) / ( 2 * rho_i * rho_j));
+        auto pressureFact = -mass_j * rho_j * ((pos_i + pos_j) / (2 * rho_i * rho_j));
+        auto viscosityVectFact = -mass_j * rho_j * ((spe_i + spe_j) / (2 * rho_i * rho_j));
 
-        tempPressureForce += pressureFact * pressureKernel.gradW(dist);
-        tempViscosityForce += viscosityVectFact * pressureKernel.laplacianW(dist);
-        if (colourDirection.len() <= flu.l) {
-            tempSurfaceTensionForce -= flu.sigma * fieldKernel.laplacianW(dist) * fieldKernel.gradW(dist).normal();
+        tempPressureForce += pressureFact * this->pressureKernel.gradW(dist);
+        tempViscosityForce += viscosityVectFact * this->pressureKernel.laplacianW(dist);
+        if (this->colourDirection.len() <= this->flu.l) {
+            tempSurfaceTensionForce -= this->flu.sigma
+                                       * this->fieldKernel.laplacianW(dist)
+                                       * this->fieldKernel.gradW(dist).normal();
         }
     }
-    pressure_force =  tempPressureForce;
-    viscosity_force = tempViscosityForce;
-    surfaceTension_force = tempSurfaceTensionForce;
+    this->pressure_force =  tempPressureForce;
+    this->viscosity_force = tempViscosityForce;
+    this->surfaceTension_force = tempSurfaceTensionForce;
 
-    result_force = tempPressureForce + tempViscosityForce + tempSurfaceTensionForce;
-    for (auto f: ext_forces) {
-        result_force += f->F(curr_pos);
+    this->result_force = tempPressureForce + tempViscosityForce + tempSurfaceTensionForce;
+    for (auto f: this->ext_forces) {
+        this->result_force += f->F(this->curr_pos) * this->mass;
     }
 }

@@ -15,8 +15,7 @@
 
 #define RAD_MUL = 2
 
-class Particle {
-public:
+struct Particle {
     Particle(double r, Fluid& flu, listForces& f, KernelPoly6& fKern,
              KernelSpiky& pKern,
              KernelViscosity& vKern,
@@ -69,5 +68,4 @@ public:
     Vec3d pressure_force;
     Vec3d viscosity_force;
     Vec3d surfaceTension_force;
-
 };

@@ -1,33 +1,17 @@
 #pragma once
 
 #include <math.h>
+#include <valarray>
 #include "utils/macros.hh"
+
+using namespace std;
 
 template <class T>
 struct Vec3 {
-    T v[3];
-    Vec3() {
-        v[0] = v[1] = v[2] = 0.0;
-    }
-    Vec3( const Vec3<int> &vd) {
-        v[0] = vd.v[0];
-        v[1] = vd.v[1];
-        v[2] = vd.v[2];
-    }
-    Vec3( const Vec3<double> &vd) {
-        v[0] = vd.v[0];
-        v[1] = vd.v[1];
-        v[2] = vd.v[2];
-    }
-    Vec3( const Vec3<float> &vd) {
-        v[0] = vd.v[0];
-        v[1] = vd.v[1];
-        v[2] = vd.v[2];
-    }
-    Vec3( const Vec3<long double> &vd) {
-        v[0] = vd.v[0];
-        v[1] = vd.v[1];
-        v[2] = vd.v[2];
+    valarray<T> v;
+    Vec3() : v(0.0, 3) {}
+    Vec3( const valarray<T>& vd) {
+        v = vd;
     }
     Vec3( double x, double y, double z ) {
         v[0] = x;
@@ -76,11 +60,11 @@ struct Vec3 {
     T operator*(Vec3<T> vec) const {
         return v[0]*vec[0]+v[1]*vec[1]+v[2]*vec[2];
     }
-    T len2() const {
+    T len_square() const {
         return v[0]*v[0]+v[1]*v[1]+v[2]*v[2];
     }
     T len() const {
-        return sqrtf(len2());
+        return sqrtf(len_square());
     }
     Vec3 normal() const {
         Vec3 copy = *this;
