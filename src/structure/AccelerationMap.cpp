@@ -55,6 +55,11 @@ void AccelerationMap::remove(shared_ptr<Particle> ptr) {
     }
 }
 
-Particle AccelerationMap::query(ino64_t hash) {
-
+SetParticle AccelerationMap::query(int64_t hash) {
+    unordered_map<int64_t, SetParticle>::iterator got = map.find(hash);
+    if (got == map.end()) {
+        return SetParticle();
+    } else {
+        return got->second;
+    }
 }

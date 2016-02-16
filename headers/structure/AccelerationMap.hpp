@@ -21,7 +21,7 @@ public:
     int64_t get(vec3 vec);
     void add(shared_ptr<Particle>  p);
     void remove(shared_ptr<Particle>  p);
-    Particle query(ino64_t hash);
+    SetParticle query(int64_t hash);
     std::unordered_map<int64_t, SetParticle> map;
 
 protected:

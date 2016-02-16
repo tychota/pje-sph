@@ -3,11 +3,10 @@ project(PJE)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 FIND_PACKAGE(Armadillo REQUIRED)
-FIND_PACKAGE(OpenMP REQUIRED)
 FIND_PACKAGE(VTK REQUIRED)
 FIND_PACKAGE(HDF5 REQUIRED)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS} -std=c++14")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 INCLUDE_DIRECTORIES(
         ${ARMADILLO_INCLUDE_DIRS}
@@ -32,7 +31,8 @@ ADD_LIBRARY(PJECommon
 
 ADD_LIBRARY(PJESolid
         src/solid/Solid.cpp
-        headers/solid/Solid.hpp src/solid/Cube.cpp headers/solid/Cube.hpp)
+        headers/solid/Solid.hpp
+      src/solid/Box.cpp headers/solid/Box.hpp)
 
 ADD_LIBRARY(PJEKernel
         src/kernel/Kernel.cpp
