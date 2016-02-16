@@ -22,10 +22,12 @@ public:
     void add(shared_ptr<Particle>  p);
     void remove(shared_ptr<Particle>  p);
     SetParticle query(int64_t hash);
-    std::unordered_map<int64_t, SetParticle> map;
+    SetParticle neighbour(shared_ptr<Particle> part, double radius);
 
+    std::unordered_map<int64_t, SetParticle> map;
 protected:
     shared_ptr<spdlog::logger> console = spd::get("console");
+
 
 private:
     double l;

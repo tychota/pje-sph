@@ -26,22 +26,22 @@ int64_t AccelerationMap::get(vec3 vec) {
     return hash;
 }
 
-void AccelerationMap::add(shared_ptr<Particle> ptr) {
-    int64_t hash = get(ptr->curr_pos);
+void AccelerationMap::add(shared_ptr<Particle> part) {
+    int64_t hash = get(part->curr_pos);
 
     // on recupère l'iterateur sur le pointeur
     unordered_map<int64_t, SetParticle>::iterator got = map.find(hash);
     if (got == map.end()) {
-        SetParticle bucket{ ptr };
+        SetParticle bucket{ part };
         map.insert({{hash, bucket}});
     } else {
         SetParticle& bucket = got->second;
-        bucket.insert(ptr);
+        bucket.insert(part);
     }
 }
 
-void AccelerationMap::remove(shared_ptr<Particle> ptr) {
-    int64_t hash = get(ptr->curr_pos);
+void AccelerationMap::remove(shared_ptr<Particle> part) {
+    int64_t hash = get(part->curr_pos);
 
     // on recupère l'iterateur sur le pointeur
     unordered_map<int64_t, SetParticle>::iterator got = map.find(hash);
@@ -49,7 +49,7 @@ void AccelerationMap::remove(shared_ptr<Particle> ptr) {
         throw std::exception();
     } else {
         SetParticle bucket = got->second;
-        bucket.erase(std::find(bucket.begin(), bucket.end(), ptr));
+        bucket.erase(std::find(bucket.begin(), bucket.end(), part));
         /*if (bucket.empty())
             map.erase(got);*/
     }
@@ -62,4 +62,25 @@ SetParticle AccelerationMap::query(int64_t hash) {
     } else {
         return got->second;
     }
+}
+
+SetParticle AccelerationMap::neighbour(shared_ptr<Particle> part, double radius) {
+    SetParticle neighbour;
+    vec3 pos = part->curr_pos;
+    for (int i = pos(0) - radius; i <= pos(0) + radius; i += l) {
+        for (int j = pos(1) - radius; j <= pos(1) + radius; j += l) {
+            for (int k = pos(0) - radius; k <= pos(0) + radius; k += l) {
+                vec3 p = {(double)i, (double)j, (double)k};
+                int64_t hash = get(p);
+                SetParticle candidates = query(hash);
+                for (auto i: candidates) {
+                    if (norm(pos - i->curr_pos) <= radius) {
+                        neighbour.insert(i);
+                    }
+                }
+            }
+        }
+    }
+
+    return neighbour;
 }

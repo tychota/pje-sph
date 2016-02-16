@@ -61,5 +61,6 @@ ADD_EXECUTABLE(tests
         test/unit/forceTest.cpp
         test/unit/fluidTest.cpp
         test/unit/kernelTest.cpp
-        test/unit/particleTest.cpp)
+        test/unit/particleTest.cpp
+        test/unit/solidTest.cpp)
 TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJECommon PJEAcceleration PJESolid PJEKernel PJEException )

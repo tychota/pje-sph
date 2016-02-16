@@ -69,9 +69,11 @@ TEST_CASE( "It is possible to create and modify a particle", "[particle]" ) {
         shared_ptr<Particle> p4s = make_shared<Particle>(p4);
         vector<shared_ptr<Particle>> vp1 = {p4s};
         p3.updateField(vp1);
-        REQUIRE(p3.density == 814.1755245657);
-        REQUIRE(p3.colour == 0);
-        REQUIRE(p3.colourDirection[2] == 0);
-        REQUIRE(p3.colourLaplacian == 0);
+        REQUIRE(p3.density - 814.1755245657 < 1e-5);
+        REQUIRE(p3.colour - 0.8141755243 < 1e-5);
+        REQUIRE(p3.colourDirection[1] == 0);
+        REQUIRE(p3.colourDirection[2] - 1.2243240967 < 1e-5);
+        REQUIRE(p3.colourDirection[3] == 0);
+        REQUIRE(p3.colourLaplacian + 366.0698364258 < 1e-5);
     };
 };

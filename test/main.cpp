@@ -1,5 +1,4 @@
 #define CATCH_CONFIG_RUNNER
-#define CATCH_CONFIG_COLOUR_NONE
 
 #define CATCH_CONFIG_CPP11_NULLPTR              // nullptr is supported?
 #define CATCH_CONFIG_CPP11_NOEXCEPT             // noexcept is supported?

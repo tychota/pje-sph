@@ -1,6 +1,6 @@
 #include "common/Particle.hpp"
 
-vec vn = zeros<vec>(3);
+vec3 vn = {0, 0, 0};
 
 Particle::Particle(double r,
                    Fluid & flu,
@@ -9,9 +9,9 @@ Particle::Particle(double r,
                    KernelSpiky& pKern,
                    KernelViscosity& vKern,
                    KernelPoly6& sKern,
-                   vec pos,
-                   vec spe,
-                   vec acc):
+                   vec3 pos,
+                   vec3 spe,
+                   vec3 acc):
         flu(flu),
         rad(r),
         ext_forces(f),
@@ -50,8 +50,7 @@ void Particle::updateField(std::vector<std::shared_ptr<Particle>> neighb) {
     double dens = 0;
     double col = 0;
     double colLapl = 0;
-    vec colGrad(3);
-    colGrad.zeros();
+    vec3 colGrad = {0, 0, 0};
     double colFactor = 0;
     double W;
     vec3 dist;

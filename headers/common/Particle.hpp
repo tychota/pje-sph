@@ -44,9 +44,9 @@ struct Particle {
              KernelSpiky& pKern,
              KernelViscosity& vKern,
              KernelPoly6& sKern,
-             vec pos,
-             vec spe,
-             vec acc);
+             vec3 pos,
+             vec3 spe,
+             vec3 acc);
     Particle(double r, Fluid& flu, listForces& f, KernelPoly6& fKern,
              KernelSpiky& pKern,
              KernelViscosity& vKern,
@@ -72,27 +72,27 @@ struct Particle {
     // Colour field
     double colour;
     double colourLaplacian;
-    vec colourDirection;
+    vec3 colourDirection;
 
     // Position
-    vec curr_pos;
-    vec next_pos;
-    vec reac_pos;
+    vec3 curr_pos;
+    vec3 next_pos;
+    vec3 reac_pos;
 
     // Speed
-    vec curr_spe;
-    vec next_spe;
-    vec reac_spe;
+    vec3 curr_spe;
+    vec3 next_spe;
+    vec3 reac_spe;
 
     // Accélération
-    vec curr_acc;
-    vec next_acc;
+    vec3 curr_acc;
+    vec3 next_acc;
 
     // Force
-    vec result_force;
+    vec3 result_force;
     listForces ext_forces;
 
-    vec pressure_force;
-    vec viscosity_force;
-    vec surfaceTension_force;
+    vec3 pressure_force;
+    vec3 viscosity_force;
+    vec3 surfaceTension_force;
 };

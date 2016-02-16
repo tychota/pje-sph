@@ -1,9 +1,9 @@
 #include "solid/Solid.hpp"
 
-Solid::Solid(double cr_co, Type type) : cr_co(cr_co), type(type) { }
+Solid::Solid(double cr_co, SolidType type) : cr_co(cr_co), type(type) { }
 
 bool Solid::detect(vec3 pos) {
-    bool is_contain = (type == Type::Recipient);
+    bool is_contain = (type == SolidType::Recipient);
     bool is_negat = (implicitFunction(pos) > 0);
 
     return (is_contain && not is_negat) || (not is_contain && is_negat);
@@ -38,3 +38,20 @@ vec3 tangentialIncoming(vec3 incomming, vec3 normal) {
 
     return normalise(k * n + l * d);
 }
+
+vec3 rotateCoord(vec3 vec, vec3 rotation) {
+    double cx = cos(rotation(0));
+    double sx = sin(rotation(0));
+    double cy = cos(rotation(1));
+    double sy = sin(rotation(1));
+    double cz = cos(rotation(2));
+    double sz = sin(rotation(2));
+
+    mat33 rotx = {{1, 0, 0}, {0, cx, -sx}, {0, sx, cx}};
+    mat33 roty = {{cy, 0, -sy}, {0, 1, 0}, {sy, 0, cy}};
+    mat33 rotz = {{cz, -sz, 0}, {sz, cz, 0}, {0, 0, 1}};
+
+
+    mat33 rot = rotx * roty * rotz;
+    return rot * vec;
+};
