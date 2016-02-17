@@ -22,11 +22,11 @@ typedef unordered_map<int64_t, ListParticle> ListParticleMap;
 class AccelerationMap {
 public:
     AccelerationMap(double l, int64_t n);
-    int64_t get(VEC v);
-    void add(Particle& p);
-    void remove(Particle&  p);
+    int64_t get(vec v);
+    void add(Particle& part);
+    void remove(Particle& part);
     ListParticle query(int64_t hash);
-    ListParticle neighbour(Particle& part, double radius);
+    ListParticle neighbour(shared_ptr<Particle> part);
 
     std::unordered_map<int64_t, ListParticle> _map;
 protected:

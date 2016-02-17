@@ -23,15 +23,10 @@ class Solver {
 
     void addConstraint(Solid constraint);
 
-    void append(Particle part);
-    void fill(function<bool(VEC)>, Particle part_pattern);
+    void append(Particle& part);
 
     void go();
-    void step();
-
-    void updateField(shared_ptr<Particle>part);
-    void updateForce(shared_ptr<Particle>part);
-    void reactCollision(shared_ptr<Particle>part);
+    void step(bool initial);
 
   private:
     double delta_t;

@@ -5,7 +5,7 @@ AccelerationMap::AccelerationMap(double l, int64_t n): l(l) {
     n_h = primegen.next(2 * n);
 }
 
-int64_t AccelerationMap::get(VEC v) {
+int64_t AccelerationMap::get(vec v) {
     int64_t ap = (int64_t) floor(v[0]/this->l) * this->p1;
     int64_t bp = (int64_t) floor(v[1]/this->l) * this->p2;
     int64_t cp = (int64_t) floor(v[2]/this->l) * this->p3;
@@ -49,8 +49,25 @@ ListParticle AccelerationMap::query(int64_t hash) {
     }
 }
 
-ListParticle AccelerationMap::neighbour(Particle& part, double radius) {
+ListParticle AccelerationMap::neighbour(shared_ptr<Particle> part) {
     ListParticle neighbour;
+    double radius = l;
+
+    for (double i=-radius; i <= radius; i += l) {
+        for (double j=-radius; j <= radius; j += l) {
+            for (double k=-radius; k <= radius; k += l) {
+                VEC v1 = {i, j, k};
+                int64_t hash(AccelerationMap::get(v1));
+                ListParticle bucket= query(hash);
+                for (auto& p: bucket) {
+                    if (norm(p.curr_pos - part->curr_pos) < radius && !(*part == p)) {
+                        shared_ptr<Particle> ptr = make_shared<Particle>(p);
+                        neighbour.insert(p);
+                    }
+                }
+            }
+        }
+    }
 
     return neighbour;
 }
