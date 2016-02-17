@@ -68,22 +68,22 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
 
-        p1->next_pos = {0.5, 0.5, 1.1};
-        p1->next_spe = {1, 1, 1};
+        p1.next_pos = {0.5, 0.5, 1.1};
+        p1.next_spe = {1, 1, 1};
 
         REQUIRE(b1.detect(v1));
 
         b1.react(p1, 0.1);
 
-        REQUIRE(abs(p1->next_pos[0] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[1] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[2] - 1) < 1e-5);
+        REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[2] - 1) < 1e-5);
 
-        REQUIRE(abs(p1->next_spe[0] - 0.8) < 1e-5);
-        REQUIRE(abs(p1->next_spe[1] - 0.8) < 1e-5);
-        REQUIRE(abs(p1->next_spe[2] + 0.7) < 1e-5);
+        REQUIRE(abs(p1.next_spe[0] - 0.8) < 1e-5);
+        REQUIRE(abs(p1.next_spe[1] - 0.8) < 1e-5);
+        REQUIRE(abs(p1.next_spe[2] + 0.7) < 1e-5);
     };
     SECTION("Unit cube, center in 0, in the same repere as the global one, particle located down ther cube") {
         VEC v0 = {0., 0., 0.};
@@ -101,22 +101,22 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
 
-        p1->next_pos = {0.5, 0.5, -1.1};
-        p1->next_spe = {-1, -1, -1};
+        p1.next_pos = {0.5, 0.5, -1.1};
+        p1.next_spe = {-1, -1, -1};
 
         REQUIRE(b1.detect(v1));
 
         b1.react(p1, 0.1);
 
-        REQUIRE(abs(p1->next_pos[0] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[1] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[2] + 1) < 1e-5);
+        REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[2] + 1) < 1e-5);
 
-        REQUIRE(abs(p1->next_spe[0] + 0.8) < 1e-5);
-        REQUIRE(abs(p1->next_spe[1] + 0.8) < 1e-5);
-        REQUIRE(abs(p1->next_spe[2] - 0.7) < 1e-5);
+        REQUIRE(abs(p1.next_spe[0] + 0.8) < 1e-5);
+        REQUIRE(abs(p1.next_spe[1] + 0.8) < 1e-5);
+        REQUIRE(abs(p1.next_spe[2] - 0.7) < 1e-5);
     };
     SECTION("Non unit cube, center in 0, in the same repere as the global one, particle located down ther cube") {
         VEC v0 = {0., 0., 0.};
@@ -134,18 +134,18 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        shared_ptr<Particle> p1 =make_shared<Particle>(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 =Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
 
-        p1->next_pos = {0.5, 0.5, -2.1};
-        p1->next_spe = {-1, -1, -1};
+        p1.next_pos = {0.5, 0.5, -2.1};
+        p1.next_spe = {-1, -1, -1};
 
         REQUIRE(b1.detect(v1));
 
         b1.react(p1, 0.1);
 
-        REQUIRE(abs(p1->next_pos[0] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[1] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[2] + 2) < 1e-5);
+        REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[2] + 2) < 1e-5);
     };
     SECTION("Non unit cube, not center in 0, in the same repere as the global one, particle located down ther cube") {
         VEC v0 = {0., 1., 0.};
@@ -164,17 +164,17 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
 
-        p1->next_pos = {0.5, 1.5, -2.1};
-        p1->next_spe = {-1, -1, -1};
+        p1.next_pos = {0.5, 1.5, -2.1};
+        p1.next_spe = {-1, -1, -1};
 
         REQUIRE(b1.detect(v1));
 
         b1.react(p1, 0.1);
 
-        REQUIRE(abs(p1->next_pos[0] - 0.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[1] - 1.5) < 1e-5);
-        REQUIRE(abs(p1->next_pos[2] + 2) < 1e-5);
+        REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[1] - 1.5) < 1e-5);
+        REQUIRE(abs(p1.next_pos[2] + 2) < 1e-5);
     };
 }

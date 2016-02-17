@@ -10,12 +10,12 @@
 
 #pragma once
 
-#include "sole/sole.hpp"
 #include <map>
 #include <memory>
 #include <vector>
 #include <armadillo>
 
+#include "sole/sole.hpp"
 #include "utils/macros.hpp"
 #include "kernel/Kernel.hpp"
 #include "kernel/KernelPoly6.hpp"

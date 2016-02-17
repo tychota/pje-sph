@@ -48,7 +48,7 @@ TEST_CASE( "It is possible to create and modify a particle", "[particle]" ) {
         REQUIRE(p1.colourDirection[0] == 1.0);
         REQUIRE(p1.curr_acc[0] == 1.0);
         REQUIRE(p1.curr_spe[0] == 1.0);
-        REQUIRE(p1.curr_pos[0] == 1.0);
+        REQUIRE(p1.curr_pos[0] == 3.0);
         REQUIRE(p1.next_acc[0] == 1.0);
         REQUIRE(p1.next_spe[0] == 1.0);
         REQUIRE(p1.next_pos[0] == 1.0);

@@ -6,7 +6,6 @@
 #include "spdlog/spdlog.h"
 #include "sph/Particle.hpp"
 #include "solid/Box.hpp"
-#include "structure/AccelerationMap.hpp"
 
 
 using namespace spdlog;

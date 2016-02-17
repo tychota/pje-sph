@@ -12,9 +12,9 @@ class Solid {
     virtual double implicitFunction(VEC pos) { throw NotImplementedException(); }
 
     virtual bool detect(VEC pos);
-    void reaction(shared_ptr<Particle> part, VEC pos_proj, double dist, VEC normal, double delta_t);
+    void reaction(Particle& part, VEC pos_proj, double dist, VEC normal, double delta_t);
 
-    virtual void react(shared_ptr<Particle> part, double delta_t) { throw NotImplementedException(); }
+    virtual void react(Particle& part, double delta_t) { throw NotImplementedException(); }
 
   protected:
     double cr_co;

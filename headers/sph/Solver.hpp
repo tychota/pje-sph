@@ -7,7 +7,6 @@
 #include "solid/Solid.hpp"
 #include "solid/Box.hpp"
 #include "sph/Particle.hpp"
-#include "structure/AccelerationMap.hpp"
 
 using namespace arma;
 using namespace std;
@@ -29,11 +28,12 @@ class Solver {
     void step(bool initial);
 
   private:
+    double smoothing;
     double delta_t;
     int number_frames;
     int steps_per_frame;
 
-    AccelerationMap hashMap;
+    vector<Particle> listPart;
 
     Box domain;
     vector<Solid> listConstraints;

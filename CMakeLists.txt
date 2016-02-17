@@ -14,13 +14,11 @@ INCLUDE_DIRECTORIES(
         headers
         vendors)
 
-
-
-ADD_LIBRARY(PJEHash
-        src/utils/Prime.cpp
-        headers/utils/Prime.hpp
-        src/structure/AccelerationMap.cpp
-        headers/structure/AccelerationMap.hpp)
+ADD_LIBRARY(PJEIo
+        src/io/Writer.cpp
+        headers/io/Writer.hpp
+        src/io/TextWriter.cpp
+        headers/io/TextWriter.hpp)
 
 ADD_LIBRARY(PJESph
         src/sph/Particle.cpp
@@ -58,15 +56,14 @@ ADD_LIBRARY(PJEException
         headers/exception/NotImplementedException.hpp)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEHash PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJEIo PJESolid PJESph PJECommon PJEKernel PJEException )
 
 ADD_EXECUTABLE(tests
         test/main.cpp
-        test/unit/accelTest.cpp
         test/unit/exceptionTest.cpp
         test/unit/forceTest.cpp
         test/unit/fluidTest.cpp
         test/unit/kernelTest.cpp
         test/unit/particleTest.cpp
         test/unit/solidTest.cpp)
-TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEHash PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJEIo PJESolid PJESph PJECommon PJEKernel PJEException )
