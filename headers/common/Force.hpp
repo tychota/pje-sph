@@ -14,18 +14,18 @@
 #include <memory>
 
 
+#include "utils/macros.hpp"
 #include "kernel/Kernel.hpp"
-#include "utils/Vec3.hpp"
 
 using namespace std;
 class Force {
   public:
-    Force(vec3 dir);
+    Force(VEC dir);
 
-    virtual vec3 F();
-    virtual vec3 F(vec3 Pos);
+    virtual VEC F();
+    virtual VEC F(VEC Pos);
   protected:
-    vec3 val;
+    VEC val;
 };
 
 typedef vector<shared_ptr<Force>> listForces;

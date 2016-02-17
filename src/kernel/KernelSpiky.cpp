@@ -17,7 +17,7 @@ double KernelSpiky::W(double distance) {
     }
 }
 
-vec3 KernelSpiky::gradW(double distance, const vec3& distanceVector) {
+VEC KernelSpiky::gradW(double distance, const VEC& distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return factorGradW * pow((smoothingLength  - distance ), 2) * distanceVector / distance;
@@ -28,7 +28,7 @@ vec3 KernelSpiky::gradW(double distance, const vec3& distanceVector) {
 }
 
 
-double KernelSpiky::laplacianW(double distance, const vec3 &distanceVector) {
+double KernelSpiky::laplacianW(double distance, const VEC &distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return -2 * factorLapW * (smoothingLength - distance) * (smoothingLength - 2 * distance) / distance;

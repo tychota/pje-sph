@@ -1,11 +1,11 @@
 #include "common/Force.hpp"
 
-Force::Force(vec3 dir) : val(dir) { }
+Force::Force(VEC dir) : val(dir) { }
 
-vec3 Force::F() {
+VEC Force::F() {
     return val;
 }
 
-vec3 Force::F(vec3 pos) {
+VEC Force::F(VEC pos) {
     return F();
 }

@@ -1,6 +1,6 @@
 #include "structure/AccelerationMap.hpp"
 
-AccelerationMap::AccelerationMap(double l, int64_t n): l(l), n(n) {
+AccelerationMap::AccelerationMap(double l, int64_t n): l(l) {
     console->debug("<HASH> Construct a new acceleration structure");
     console->debug("<HASH>  * --> number of particles : {} ", n);
     console->debug("<HASH>  * --> size of a grid element: {} ", l);
@@ -15,11 +15,11 @@ AccelerationMap::AccelerationMap(double l, int64_t n): l(l), n(n) {
     map.reserve(space);
 }
 
-int64_t AccelerationMap::get(vec3 vec) {
+int64_t AccelerationMap::get(VEC VEC) {
     console->debug("<HASH> Computing ap, bp, cp and hashes");
-    int64_t ap = (int64_t) floor(vec[0]/this->l) * this->p1;
-    int64_t bp = (int64_t) floor(vec[1]/this->l) * this->p2;
-    int64_t cp = (int64_t) floor(vec[2]/this->l) * this->p3;
+    int64_t ap = (int64_t) floor(VEC[0]/this->l) * this->p1;
+    int64_t bp = (int64_t) floor(VEC[1]/this->l) * this->p2;
+    int64_t cp = (int64_t) floor(VEC[2]/this->l) * this->p3;
     console->debug("<HASH>  * --> ap: {}, bp: {}, cp {} ", ap, bp, cp);
     auto hash = (ap ^ bp ^ cp) % this->n_h;
     console->debug("<HASH>  * --> hash generated: {} ", hash);
@@ -66,11 +66,11 @@ SetParticle AccelerationMap::query(int64_t hash) {
 
 SetParticle AccelerationMap::neighbour(shared_ptr<Particle> part, double radius) {
     SetParticle neighbour;
-    vec3 pos = part->curr_pos;
+    VEC pos = part->curr_pos;
     for (int i = pos(0) - radius; i <= pos(0) + radius; i += l) {
         for (int j = pos(1) - radius; j <= pos(1) + radius; j += l) {
             for (int k = pos(0) - radius; k <= pos(0) + radius; k += l) {
-                vec3 p = {(double)i, (double)j, (double)k};
+                VEC p = {(double)i, (double)j, (double)k};
                 int64_t hash = get(p);
                 SetParticle candidates = query(hash);
                 for (auto i: candidates) {

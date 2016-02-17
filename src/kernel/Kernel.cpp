@@ -9,16 +9,12 @@ double Kernel::W(double distance) {
     throw NotImplementedException();
 }
 
-vec3 Kernel::gradW(double distance, const vec3& distanceVector) {
+VEC Kernel::gradW(double distance, const VEC& distanceVector) {
     throw NotImplementedException();
 }
 
-double Kernel::laplacianW(double distance, const vec3 &distanceVector) {
+double Kernel::laplacianW(double distance, const VEC &distanceVector) {
     throw NotImplementedException();
-}
-
-double Kernel::getDilationFactor() {
-    return 2.0;
 }
 
 double Kernel::maxDistance() {

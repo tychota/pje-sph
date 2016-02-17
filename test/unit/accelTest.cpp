@@ -3,20 +3,20 @@
 TEST_CASE("Proximity Hash related units tests", "[hash]") {
     AccelerationMap hash1(1, 100);
     SECTION("Hash of null vector is 0") {
-        vec3 v0 = {0, 0, 0};
+        VEC v0 = {0, 0, 0};
         REQUIRE(hash1.get(v0) == 0);
     }
     SECTION("Neighbour particules have the same hash") {
-        vec3 v0 = {0, 0, 0};
-        vec3 v1 = {0.9, 0.9, 0.9};
-        vec3 v2 = {-0.9, -0.9, -0.9};
-        vec3 v3 = {-0.1, -0.1, -0.1};
+        VEC v0 = {0, 0, 0};
+        VEC v1 = {0.9, 0.9, 0.9};
+        VEC v2 = {-0.9, -0.9, -0.9};
+        VEC v3 = {-0.1, -0.1, -0.1};
         REQUIRE(hash1.get(v0) == hash1.get(v1));
         REQUIRE(hash1.get(v2) == hash1.get(v3));
     }
     SECTION("Particles can be added") {
         Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
-        vec3 g = {0, 0, -9.8};
+        VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
         listForces forces{gravity};
         KernelPoly6 kp6 = KernelPoly6(3);

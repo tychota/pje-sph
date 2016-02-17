@@ -7,6 +7,7 @@ FIND_PACKAGE(VTK REQUIRED)
 FIND_PACKAGE(HDF5 REQUIRED)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -Wall -DNDEBUG")
 
 INCLUDE_DIRECTORIES(
         ${ARMADILLO_INCLUDE_DIRS}
@@ -21,7 +22,6 @@ ADD_LIBRARY(PJEAcceleration
 
 ADD_LIBRARY(PJECommon
         headers/utils/macros.hpp
-        headers/utils/Vec3.hpp
         src/common/Fluid.cpp
         headers/common/Fluid.hpp
         src/common/Particle.cpp

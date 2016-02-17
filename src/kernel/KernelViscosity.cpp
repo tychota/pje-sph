@@ -20,7 +20,7 @@ double KernelViscosity::W(double distance) {
     }
 }
 
-vec3 KernelViscosity::gradW(double distance, const vec3& distanceVector) {
+VEC KernelViscosity::gradW(double distance, const VEC& distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1.0) {
         return distanceVector * factorGradW * (- 3 * distance / (2 * pow(smoothingLength, 3))
@@ -32,7 +32,7 @@ vec3 KernelViscosity::gradW(double distance, const vec3& distanceVector) {
     }
 }
 
-double KernelViscosity::laplacianW(double distance, const vec3 &distanceVector) {
+double KernelViscosity::laplacianW(double distance, const VEC &distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1.0) {
         return factorLapW * (smoothingLength - distance);

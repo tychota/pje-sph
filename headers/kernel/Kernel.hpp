@@ -1,6 +1,7 @@
 #pragma once
 
 #include <armadillo>
+#include "utils/macros.hpp"
 #include "spdlog/spdlog.h"
 #include "exception/NotImplementedException.hpp"
 
@@ -13,15 +14,13 @@ public:
     Kernel(double smoothingLenght);
 
     virtual double W(double distance);
-    virtual double W(vec3 r){ return  W(norm(r)); };
+    virtual double W(VEC r){ return  W(norm(r)); };
 
-    virtual vec3 gradW(double distance, const vec3& distanceVector);
-    virtual vec3 gradW(vec3 r){ return  gradW(norm(r), r); };
+    virtual VEC gradW(double distance, const VEC& distanceVector);
+    virtual VEC gradW(VEC r){ return  gradW(norm(r), r); };
 
-    virtual double laplacianW(double distance, const vec3 &distanceVector);
-    virtual double laplacianW(const vec3 r){ return  laplacianW(norm(r), r); };
-
-    virtual double getDilationFactor();
+    virtual double laplacianW(double distance, const VEC &distanceVector);
+    virtual double laplacianW(const VEC r){ return  laplacianW(norm(r), r); };
 
     virtual double maxDistance();
 

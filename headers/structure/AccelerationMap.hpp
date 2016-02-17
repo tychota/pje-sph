@@ -5,9 +5,9 @@
 #include <algorithm>
 #include <memory>
 
-#include "common/Particle.hpp"
-#include "utils/Vec3.hpp"
+#include "utils/macros.hpp"
 #include "utils/Prime.hpp"
+#include "common/Particle.hpp"
 
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;
@@ -18,7 +18,7 @@ typedef set<shared_ptr<Particle>> SetParticle;
 class AccelerationMap {
 public:
     AccelerationMap(double l, int64_t n);
-    int64_t get(vec3 vec);
+    int64_t get(VEC VEC);
     void add(shared_ptr<Particle>  p);
     void remove(shared_ptr<Particle>  p);
     SetParticle query(int64_t hash);
@@ -31,7 +31,6 @@ protected:
 
 private:
     double l;
-    int64_t n;
     int64_t n_h;
     int64_t p1 = 111;
     int64_t p2 = 19349663;

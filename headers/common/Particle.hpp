@@ -15,14 +15,14 @@
 #include <vector>
 #include <armadillo>
 
+#include "utils/macros.hpp"
 #include "kernel/Kernel.hpp"
 #include "kernel/KernelPoly6.hpp"
 #include "kernel/KernelSpiky.hpp"
 #include "kernel/KernelViscosity.hpp"
 
-#include "utils/Vec3.hpp"
 #include "common/Fluid.hpp"
-#include "Force.hpp"
+#include "common/Force.hpp"
 
 using namespace arma;
 using namespace std;
@@ -44,9 +44,9 @@ struct Particle {
              KernelSpiky& pKern,
              KernelViscosity& vKern,
              KernelPoly6& sKern,
-             vec3 pos,
-             vec3 spe,
-             vec3 acc);
+             VEC pos,
+             VEC spe,
+             VEC acc);
     Particle(double r, Fluid& flu, listForces& f, KernelPoly6& fKern,
              KernelSpiky& pKern,
              KernelViscosity& vKern,
@@ -72,27 +72,25 @@ struct Particle {
     // Colour field
     double colour;
     double colourLaplacian;
-    vec3 colourDirection;
+    VEC colourDirection;
 
     // Position
-    vec3 curr_pos;
-    vec3 next_pos;
-    vec3 reac_pos;
+    VEC curr_pos;
+    VEC next_pos;
 
     // Speed
-    vec3 curr_spe;
-    vec3 next_spe;
-    vec3 reac_spe;
+    VEC curr_spe;
+    VEC next_spe;
 
     // Accélération
-    vec3 curr_acc;
-    vec3 next_acc;
+    VEC curr_acc;
+    VEC next_acc;
 
     // Force
-    vec3 result_force;
+    VEC result_force;
     listForces ext_forces;
 
-    vec3 pressure_force;
-    vec3 viscosity_force;
-    vec3 surfaceTension_force;
+    VEC pressure_force;
+    VEC viscosity_force;
+    VEC surfaceTension_force;
 };

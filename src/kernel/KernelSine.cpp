@@ -16,7 +16,7 @@ double KernelSine::W(double distance) {
     }
 }
 
-vec3 KernelSine::gradW(double distance, const vec3& distanceVector) {
+VEC KernelSine::gradW(double distance, const VEC& distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return - factorGradW *  distanceVector / distance * sin((distance + smoothingLength) / (2 * smoothingLength)) ;

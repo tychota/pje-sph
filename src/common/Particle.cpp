@@ -1,6 +1,6 @@
 #include "common/Particle.hpp"
 
-vec3 vn = {0, 0, 0};
+VEC vn = {0, 0, 0};
 
 Particle::Particle(double r,
                    Fluid & flu,
@@ -9,34 +9,28 @@ Particle::Particle(double r,
                    KernelSpiky& pKern,
                    KernelViscosity& vKern,
                    KernelPoly6& sKern,
-                   vec3 pos,
-                   vec3 spe,
-                   vec3 acc):
+                   VEC pos,
+                   VEC spe,
+                   VEC acc):
         flu(flu),
-        rad(r),
-        ext_forces(f),
         fieldKernel(fKern),
         pressureKernel(pKern),
-        viscosityKernel(vKern),
         surfaceKernel(sKern),
+        viscosityKernel(vKern),
+        rad(r),
+        mass((4. / 3. * PI * pow(rad, 3)) * flu.rho0),
+        density(flu.rho0),
+        colour(0.),
+        colourLaplacian(0.),
+        colourDirection(vn),
         curr_pos(pos),
         next_pos(pos),
-        reac_pos(pos),
         curr_spe(spe),
         next_spe(spe),
-        reac_spe(spe),
         curr_acc(acc),
         next_acc(acc),
-        colourDirection(vn)
-
-{
-    mass = (4. / 3. * PI * pow(rad, 3)) * flu.rho0; // sphérique
-
-    colour = 0.;
-    colourLaplacian = 0.;
-
-    density = flu.rho0;
-}
+        ext_forces(f)
+{ }
 
 Particle::Particle(double r,
                    Fluid &flu,
@@ -50,10 +44,10 @@ void Particle::updateField(std::vector<std::shared_ptr<Particle>> neighb) {
     double dens = 0;
     double col = 0;
     double colLapl = 0;
-    vec3 colGrad = {0, 0, 0};
+    VEC colGrad = {0, 0, 0};
     double colFactor = 0;
     double W;
-    vec3 dist;
+    VEC dist;
     for (auto other: neighb) {
         dist = this->curr_pos - other->curr_pos;
         W = this->fieldKernel.W(dist);
@@ -71,10 +65,10 @@ void Particle::updateField(std::vector<std::shared_ptr<Particle>> neighb) {
 }
 
 void Particle::updateForce(std::vector<std::shared_ptr<Particle>> neighb) {
-    vec3 dist;
-    vec3 tempPressureForce = zeros<vec>(3);
-    vec3 tempViscosityForce = zeros<vec>(3);
-    vec3 tempSurfaceTensionForce = zeros<vec>(3);
+    VEC dist;
+    VEC tempPressureForce = {0., 0., 0.};
+    VEC tempViscosityForce = {0., 0., 0.};
+    VEC tempSurfaceTensionForce = {0., 0., 0.};
 
     for (auto other: neighb) {
         dist = this->curr_pos - other->curr_pos;

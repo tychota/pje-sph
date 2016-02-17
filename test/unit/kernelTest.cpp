@@ -21,13 +21,13 @@ TEST_CASE( "Kernel return the correct maxDistance", "[kernel]") {
 };
 
 TEST_CASE( "Kernel Value are null after maxRange", "[kernel]") {
-    vec3 v00 = {1, 1, 1};
-    vec3 eps = {0.1, 0.1, 0.1};
+    VEC v00 = {1, 1, 1};
+    VEC eps = {0.1, 0.1, 0.1};
 
     SECTION( "Kernel Poly6") {
         KernelPoly6 k1(5.);
-        vec3 v0 = normalise(v00) * k1.maxDistance() + eps;
-        vec3 v1 = vec3(k1.gradW(v0));
+        VEC v0 = normalise(v00) * k1.maxDistance() + eps;
+        VEC v1 = VEC(k1.gradW(v0));
 
         REQUIRE(k1.W(k1.maxDistance() + 0.1) == 0.);
 
@@ -39,8 +39,8 @@ TEST_CASE( "Kernel Value are null after maxRange", "[kernel]") {
     };
     SECTION( "Kernel Sine") {
         KernelSine k1(5.);
-        vec3 v0 = normalise(v00) * k1.maxDistance() + eps;
-        vec3 v1 = vec3(k1.gradW(v0));
+        VEC v0 = normalise(v00) * k1.maxDistance() + eps;
+        VEC v1 = VEC(k1.gradW(v0));
 
         REQUIRE(k1.W(k1.maxDistance() + 0.1) == 0.);
 
@@ -50,8 +50,8 @@ TEST_CASE( "Kernel Value are null after maxRange", "[kernel]") {
     };
     SECTION( "Kernel Spiky") {
         KernelSpiky k1(5.);
-        vec3 v0 = normalise(v00) * k1.maxDistance() + eps;
-        vec3 v1 = vec3(k1.gradW(v0));
+        VEC v0 = normalise(v00) * k1.maxDistance() + eps;
+        VEC v1 = VEC(k1.gradW(v0));
 
         REQUIRE(k1.W(k1.maxDistance() + 0.1) == 0.);
 
@@ -63,8 +63,8 @@ TEST_CASE( "Kernel Value are null after maxRange", "[kernel]") {
     };
     SECTION( "Kernel Viscosity") {
         KernelViscosity k1(5.);
-        vec3 v0 = normalise(v00) * k1.maxDistance() + eps;
-        vec3 v1 = vec3(k1.gradW(v0));
+        VEC v0 = normalise(v00) * k1.maxDistance() + eps;
+        VEC v1 = VEC(k1.gradW(v0));
 
         REQUIRE(k1.W(k1.maxDistance() + 0.1) == 0.);
 

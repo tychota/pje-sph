@@ -17,7 +17,7 @@ double KernelPoly6::W(double distance) {
     }
 }
 
-vec3 KernelPoly6::gradW(double distance, const vec3& distanceVector) {
+VEC KernelPoly6::gradW(double distance, const VEC& distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return - factorGradW * pow((smoothingLength * smoothingLength - distance * distance), 2) * distanceVector;
@@ -32,7 +32,7 @@ vec3 KernelPoly6::gradW(double distance, const vec3& distanceVector) {
 }
 
 
-double KernelPoly6::laplacianW(double distance, const vec3 &distanceVector) {
+double KernelPoly6::laplacianW(double distance, const VEC &distanceVector) {
     double normalizedDistance = distance / smoothingLength;
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return - factorGradW

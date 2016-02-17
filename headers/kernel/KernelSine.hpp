@@ -8,12 +8,11 @@ public:
     KernelSine(double smoothingLength);
 
     virtual double W(double distance);
-    virtual double W(vec3 r){ return  W(norm(r)); };
+    virtual double W(VEC r){ return  W(norm(r)); };
 
-    virtual vec3 gradW(double distance, const vec3& distanceVector);
-    virtual vec3 gradW(vec3 r){ return  gradW(norm(r), r); };
+    virtual VEC gradW(double distance, const VEC& distanceVector);
+    virtual VEC gradW(VEC r){ return  gradW(norm(r), r); };
 
-    virtual double getDilationFactor() const { return 2.0; }
     virtual double maxDistance();
 
 private:
