@@ -16,23 +16,29 @@ TEST_CASE("Proximity Hash related units tests", "[hash]") {
     }
     SECTION("Particles can be added") {
         Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
+        shared_ptr<Fluid> f1 = make_shared<Fluid>(fluid1);
         VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
         listForces forces{gravity};
-        KernelPoly6 kp6 = KernelPoly6(3);
-        KernelSpiky ksp = KernelSpiky(3);
-        KernelViscosity kv = KernelViscosity(3);
-        shared_ptr<Particle> p1 = make_shared<Particle>(0.1, fluid1, forces, kp6, ksp, kv, kp6);
-        shared_ptr<Particle> p2 = make_shared<Particle>(0.1, fluid1, forces, kp6, ksp, kv, kp6);
-        p1->curr_pos = {0, 0, 0};
-        p2->curr_pos = {0.1, 0, 0};
+        shared_ptr<listForces> lf = make_shared<listForces>(forces);
+
+        shared_ptr<KernelPoly6> kp6 = make_shared<KernelPoly6>(0.2);
+        shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
+        shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
+
+        Particle p1(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p2(0.1, f1, lf, kp6, ksp, kv, kp6);
+
+        p1.curr_pos = {0, 0, 0};
+        p2.curr_pos = {0.1, 0, 0};
+
         hash1.add(p1);
         hash1.add(p2);
         // Check if map got the 0 key
-        unordered_map<int64_t, set<shared_ptr<Particle>>>::iterator it1 = hash1.map.find(0);
-        REQUIRE(it1 != hash1.map.end());
+        ListParticleMap::iterator it1 = hash1._map.find(0);
+        REQUIRE(it1 != hash1._map.end());
         // Check if the vector in map 0 contains p1 and p2
-        set<shared_ptr<Particle>> *s = &it1->second;
+        ListParticle *s = &it1->second;
         REQUIRE(s->find(p1) != s->end());
         REQUIRE(s->find(p2) != s->end());
     }

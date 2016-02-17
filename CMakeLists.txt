@@ -14,25 +14,32 @@ INCLUDE_DIRECTORIES(
         headers
         vendors)
 
-ADD_LIBRARY(PJEAcceleration
+
+
+ADD_LIBRARY(PJEHash
         src/utils/Prime.cpp
         headers/utils/Prime.hpp
         src/structure/AccelerationMap.cpp
         headers/structure/AccelerationMap.hpp)
 
+ADD_LIBRARY(PJESph
+        src/sph/Particle.cpp
+        headers/sph/Particle.hpp
+        src/sph/Solver.cpp
+        headers/sph/Solver.hpp)
+
 ADD_LIBRARY(PJECommon
         headers/utils/macros.hpp
         src/common/Fluid.cpp
         headers/common/Fluid.hpp
-        src/common/Particle.cpp
-        headers/common/Particle.hpp
         src/common/Force.cpp
         headers/common/Force.hpp)
 
 ADD_LIBRARY(PJESolid
         src/solid/Solid.cpp
         headers/solid/Solid.hpp
-      src/solid/Box.cpp headers/solid/Box.hpp)
+        src/solid/Box.cpp
+        headers/solid/Box.hpp)
 
 ADD_LIBRARY(PJEKernel
         src/kernel/Kernel.cpp
@@ -46,13 +53,12 @@ ADD_LIBRARY(PJEKernel
         src/kernel/KernelViscosity.cpp
         headers/kernel/KernelViscosity.hpp)
 
-
 ADD_LIBRARY(PJEException
         src/exception/NotImplementedException.cpp
         headers/exception/NotImplementedException.hpp)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJECommon PJEAcceleration PJESolid PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEHash PJEKernel PJEException )
 
 ADD_EXECUTABLE(tests
         test/main.cpp
@@ -63,4 +69,4 @@ ADD_EXECUTABLE(tests
         test/unit/kernelTest.cpp
         test/unit/particleTest.cpp
         test/unit/solidTest.cpp)
-TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJECommon PJEAcceleration PJESolid PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEHash PJEKernel PJEException )

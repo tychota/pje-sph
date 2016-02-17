@@ -1,2 +1,4 @@
 #pragma once
-#include "catch.hpp"
+#include "catch/catch.hpp"
+
+#include "utils/macros.hpp"

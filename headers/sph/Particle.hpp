@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "sole/sole.hpp"
 #include <map>
 #include <memory>
 #include <vector>
@@ -40,26 +41,32 @@ using namespace std;
  *  - a pointer to the fluid
  */
 struct Particle {
-    Particle(double r, Fluid& flu, listForces& f, KernelPoly6& fKern,
-             KernelSpiky& pKern,
-             KernelViscosity& vKern,
-             KernelPoly6& sKern,
+    Particle(double r,
+             shared_ptr<Fluid> flu,
+             shared_ptr<listForces> f,
+             shared_ptr<KernelPoly6> fKern,
+             shared_ptr<KernelSpiky> pKern,
+             shared_ptr<KernelViscosity> vKern,
+             shared_ptr<KernelPoly6> sKern,
              VEC pos,
              VEC spe,
              VEC acc);
-    Particle(double r, Fluid& flu, listForces& f, KernelPoly6& fKern,
-             KernelSpiky& pKern,
-             KernelViscosity& vKern,
-             KernelPoly6& sKern);
+    Particle(double r,
+             shared_ptr<Fluid> flu,
+             shared_ptr<listForces> f,
+             shared_ptr<KernelPoly6> fKern,
+             shared_ptr<KernelSpiky> pKern,
+             shared_ptr<KernelViscosity> vKern,
+             shared_ptr<KernelPoly6> sKern);
 
-    void updateField(std::vector<std::shared_ptr<Particle>> neighb);
-    void updateForce(std::vector<std::shared_ptr<Particle>> neighb);
+    void updateField(vector<shared_ptr<Particle>> neighb);
+    void updateForce(vector<shared_ptr<Particle>> neighb);
 
-    Fluid& flu; // réference vers un fluid
-    KernelPoly6& fieldKernel;
-    KernelSpiky& pressureKernel;
-    KernelPoly6& surfaceKernel;
-    KernelViscosity& viscosityKernel;
+    shared_ptr<Fluid> flu; // réference vers un fluid
+    shared_ptr<KernelPoly6> fieldKernel;
+    shared_ptr<KernelSpiky> pressureKernel;
+    shared_ptr<KernelPoly6> surfaceKernel;
+    shared_ptr<KernelViscosity> viscosityKernel;
 
     // Particule caracteristic
     double rad; // rayon
@@ -79,7 +86,10 @@ struct Particle {
     VEC next_pos;
 
     // Speed
+    // prev_half and next_half are for leapfrog
+    VEC prev_half_spe;
     VEC curr_spe;
+    VEC next_half_spe;
     VEC next_spe;
 
     // Accélération
@@ -88,9 +98,19 @@ struct Particle {
 
     // Force
     VEC result_force;
-    listForces ext_forces;
+    shared_ptr<listForces> ext_forces;
 
     VEC pressure_force;
     VEC viscosity_force;
     VEC surfaceTension_force;
+
+    sole::uuid uuid;
 };
+
+inline bool operator<(const Particle& lhs, const Particle& rhs) {
+    return lhs.uuid < rhs.uuid;
+}
+
+inline bool operator==(const Particle& lhs, const Particle& rhs) {
+    return lhs.uuid == rhs.uuid;
+}

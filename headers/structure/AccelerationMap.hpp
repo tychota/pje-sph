@@ -7,27 +7,30 @@
 
 #include "utils/macros.hpp"
 #include "utils/Prime.hpp"
-#include "common/Particle.hpp"
+#include "sph/Particle.hpp"
 
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;
 
 using namespace std;
-typedef set<shared_ptr<Particle>> SetParticle;
+
+typedef set<Particle> ListParticle;
+typedef pair<int64_t, ListParticle> ListParticlePair;
+typedef unordered_map<int64_t, ListParticle> ListParticleMap;
+
 
 class AccelerationMap {
 public:
     AccelerationMap(double l, int64_t n);
-    int64_t get(VEC VEC);
-    void add(shared_ptr<Particle>  p);
-    void remove(shared_ptr<Particle>  p);
-    SetParticle query(int64_t hash);
-    SetParticle neighbour(shared_ptr<Particle> part, double radius);
+    int64_t get(VEC v);
+    void add(Particle& p);
+    void remove(Particle&  p);
+    ListParticle query(int64_t hash);
+    ListParticle neighbour(Particle& part, double radius);
 
-    std::unordered_map<int64_t, SetParticle> map;
+    std::unordered_map<int64_t, ListParticle> _map;
 protected:
     shared_ptr<spdlog::logger> console = spd::get("console");
-
 
 private:
     double l;

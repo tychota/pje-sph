@@ -10,7 +10,7 @@
 #define CATCH_CONFIG_CPP11_OVERRIDE             // CATCH_OVERRIDE expands to override (for virtual function implementations)
 #define CATCH_CONFIG_CPP11_UNIQUE_PTR           // Use std::unique_ptr instead of std::auto_ptr
 
-#include "catch.hpp"
+#include "catch/catch.hpp"
 
 #include "spdlog/spdlog.h"
 namespace spd = spdlog;

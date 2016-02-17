@@ -1,4 +1,5 @@
 #pragma once
-#include "catch.hpp"
+#include "catch/catch.hpp"
 
-#include "common/Particle.hpp"
+#include "utils/macros.hpp"
+#include "sph/Particle.hpp"

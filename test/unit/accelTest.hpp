@@ -1,6 +1,7 @@
 #pragma once
-#include "catch.hpp"
+#include "catch/catch.hpp"
 
-#include "common/Particle.hpp"
-#include <common/Force.hpp>
+#include "utils/macros.hpp"
+#include "sph/Particle.hpp"
+#include "common/Force.hpp"
 #include "structure/AccelerationMap.hpp"
