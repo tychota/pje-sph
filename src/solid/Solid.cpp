@@ -9,18 +9,18 @@ bool Solid::detect(VEC pos) {
     return (is_contain && not is_negat) || (not is_contain && is_negat);
 }
 
-void Solid::reaction(Particle& part, VEC pos_proj, double dist, VEC normal, double delta_t) {
-    VEC spe = part.next_spe;
+void Solid::reaction(shared_ptr<Particle> part, VEC pos_proj, double dist, VEC normal, double delta_t) {
+    VEC spe = part->next_spe;
     VEC tangential = tangentialIncoming(spe, normal);
-    double cr = part.flu->cr;
+    double cr = part->flu->cr;
     VEC surfaceSpeedReflection = - 2 * dot(spe, normal) * normal;
     VEC surfaceSpeedAbsorbtion= (1 - cr) * dot(spe, normal) * normal;
     VEC surfaceSpeedFriction = - cr_co  * dot(spe, tangential) * tangential;
 
     spe = spe + surfaceSpeedAbsorbtion + surfaceSpeedReflection + surfaceSpeedFriction;
 
-    part.next_pos = pos_proj;
-    part.next_spe = spe;
+    part->next_pos = pos_proj;
+    part->next_spe = spe;
 }
 
 VEC tangentialIncoming(VEC incomming, VEC normal) {

@@ -7,7 +7,7 @@
 *
 * Define a structure containing all fluid parameters
  */
-
+#pragma once
 #include <math.h>
 
 

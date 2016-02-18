@@ -12,7 +12,7 @@ double KernelPoly6::W(double distance) {
     if (normalizedDistance < 1) {
         return factorW * pow((smoothingLength * smoothingLength - distance * distance), 3);
     } else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return 0.0;
     }
 }
@@ -23,9 +23,9 @@ VEC KernelPoly6::gradW(double distance, const VEC& distanceVector) {
         return - factorGradW * pow((smoothingLength * smoothingLength - distance * distance), 2) * distanceVector;
     } else {
         if (normalizedDistance > 1) {
-            console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+            // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         } else if (normalizedDistance == 0) {
-            console->warn("Normalized distance shouldn't be null");
+            // console->warn("Normalized distance shouldn't be null");
         }
         return zeros<vec>(3);
     }

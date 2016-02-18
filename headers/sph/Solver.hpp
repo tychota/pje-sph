@@ -24,7 +24,7 @@ class Solver {
 
     void addConstraint(Solid constraint);
 
-    void append(Particle& part);
+    void append(shared_ptr<Particle> part);
 
     void go();
     void step(bool initial);
@@ -37,7 +37,7 @@ class Solver {
     int number_frames;
     int steps_per_frame;
 
-    vector<Particle> listPart;
+    vector<shared_ptr<Particle>> listPart;
 
     vector<Solid> listConstraints;
 };

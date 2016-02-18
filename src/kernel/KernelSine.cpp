@@ -11,7 +11,7 @@ double KernelSine::W(double distance) {
     if (normalizedDistance < 1) {
         return factorW * (cos((distance + smoothingLength) / (2 * smoothingLength)) + 1);
     } else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return 0.0;
     }
 }
@@ -21,7 +21,7 @@ VEC KernelSine::gradW(double distance, const VEC& distanceVector) {
     if (normalizedDistance < 1 && normalizedDistance != 0) {
         return - factorGradW *  distanceVector / distance * sin((distance + smoothingLength) / (2 * smoothingLength)) ;
     }  else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return zeros<vec>(3);
     }
 }

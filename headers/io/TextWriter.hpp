@@ -6,6 +6,6 @@
 class TextWriter : public Writer {
   public:
     TextWriter() {};
-    void write(vector<Particle>& partList, int step);
+    void write(const vector<shared_ptr<Particle>>& partList, int step);
 };
 

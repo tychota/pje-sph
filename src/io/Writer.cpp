@@ -1,5 +1,5 @@
 #include "io/Writer.hpp"
 
-void Writer::write(vector<Particle>& partList, int step) {
+void Writer::write(const vector<shared_ptr<Particle>>& partList, int step) {
     throw NotImplementedException();
 }

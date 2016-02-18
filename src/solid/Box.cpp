@@ -23,12 +23,12 @@ double Box::implicitFunction(VEC pos) {
     return implicit;
 }
 
-void Box::react(Particle& part, double delta_t) {
-    if (detect(part.next_pos)) {
-        VEC local_next_pos = localCoord(part.next_pos);
+void Box::react(shared_ptr<Particle> part, double delta_t) {
+    if (detect(part->next_pos)) {
+        VEC local_next_pos = localCoord(part->next_pos);
         VEC intersec_loc = min(extendAxis, max(- extendAxis, local_next_pos));
         VEC intersec_glob = globalCoord(intersec_loc);
-        double dist = norm(intersec_glob - part.next_pos);
+        double dist = norm(intersec_glob - part->next_pos);
         VEC intersec_normal = normalise(globalCoord(local_next_pos - intersec_loc));
         reaction(part, intersec_glob, dist, intersec_normal, delta_t);
     }

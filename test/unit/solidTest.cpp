@@ -75,7 +75,7 @@ TEST_CASE( "Box collison is working" ) {
 
         REQUIRE(b1.detect(v1));
 
-        b1.react(p1, 0.1);
+        b1.react(make_shared<Particle>(p1), 0.1);
 
         REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
         REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
@@ -108,7 +108,7 @@ TEST_CASE( "Box collison is working" ) {
 
         REQUIRE(b1.detect(v1));
 
-        b1.react(p1, 0.1);
+        b1.react(make_shared<Particle>(p1), 0.1);
 
         REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
         REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
@@ -141,7 +141,7 @@ TEST_CASE( "Box collison is working" ) {
 
         REQUIRE(b1.detect(v1));
 
-        b1.react(p1, 0.1);
+        b1.react(make_shared<Particle>(p1), 0.1);
 
         REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
         REQUIRE(abs(p1.next_pos[1] - 0.5) < 1e-5);
@@ -171,7 +171,7 @@ TEST_CASE( "Box collison is working" ) {
 
         REQUIRE(b1.detect(v1));
 
-        b1.react(p1, 0.1);
+        b1.react(make_shared<Particle>(p1), 0.1);
 
         REQUIRE(abs(p1.next_pos[0] - 0.5) < 1e-5);
         REQUIRE(abs(p1.next_pos[1] - 1.5) < 1e-5);

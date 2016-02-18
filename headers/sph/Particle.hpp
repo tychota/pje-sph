@@ -39,7 +39,8 @@ using namespace std;
  *  - the mass
  *  - a pointer to the fluid
  */
-struct Particle {
+class Particle {
+  public:
     Particle(double r,
              shared_ptr<Fluid> flu,
              shared_ptr<listForces> f,

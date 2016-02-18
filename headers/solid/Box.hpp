@@ -9,7 +9,7 @@ class Box : public Solid {
     VEC localCoord(VEC pos);
     VEC globalCoord(VEC localCoord);
     VEC localRange() {return extendAxis;};
-    void react(Particle& part, double delta_t);
+    void react(shared_ptr<Particle> part, double delta_t);
   private:
     VEC center;
     VEC rotation;

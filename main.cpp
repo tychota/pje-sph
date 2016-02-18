@@ -22,12 +22,11 @@ void gen_fluid(Solver& s, Particle& po) {
         for (double j = debut[1]; j <= end[1]; j+=2*r) {
             for (double k = debut[0]; k <= end[0]; k+=2*r) {
                 id ++;
-                VEC globCoord = d.globalCoord(VEC{i, j, k});
                 Particle p(po);
-                p.id = id;
-                p.curr_pos = globCoord;
+                p.curr_pos = VEC({i, j, k});
                 cout << p.curr_pos << endl;
-                s.append(move(p));
+                p.id = id;
+                s.append(make_shared<Particle>(p));
             }
         }
     }
@@ -51,7 +50,7 @@ int main() {
     shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
     shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-    Particle p1 = Particle(0.05, f1, lf, kp6, ksp, kv, kp6, 0);
+    Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6, 0);
 
     gen_fluid(s, p1);
 

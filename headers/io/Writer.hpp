@@ -10,6 +10,6 @@
 class Writer {
   public:
     Writer() {};
-    virtual void write(vector<Particle>& partList, int step);
+    virtual void write(const vector<shared_ptr<Particle>>& partList, int step);
 };
 

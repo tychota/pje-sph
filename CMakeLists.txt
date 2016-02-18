@@ -17,6 +17,8 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY(PJEIo
         src/io/Writer.cpp
         headers/io/Writer.hpp
+        #src/io/VtkWriter.cpp
+        #headers/io/VtkWriter.hpp
         src/io/TextWriter.cpp
         headers/io/TextWriter.hpp)
 
@@ -27,7 +29,6 @@ ADD_LIBRARY(PJESph
         headers/sph/Solver.hpp)
 
 ADD_LIBRARY(PJECommon
-        headers/utils/macros.hpp
         src/common/Fluid.cpp
         headers/common/Fluid.hpp
         src/common/Force.cpp

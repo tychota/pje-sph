@@ -15,7 +15,7 @@ double KernelViscosity::W(double distance) {
                           + smoothingLength / (2 * distance)
                           - 1);
     }  else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return 0.0;
     }
 }
@@ -27,7 +27,7 @@ VEC KernelViscosity::gradW(double distance, const VEC& distanceVector) {
                                                + 2 / (pow(smoothingLength, 2))
                                                - smoothingLength / (2 * pow(distance, 3)));
     }  else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return zeros<vec>(3);
     }
 }
@@ -37,7 +37,7 @@ double KernelViscosity::laplacianW(double distance, const VEC &distanceVector) {
     if (normalizedDistance < 1.0) {
         return factorLapW * (smoothingLength - distance);
     }  else {
-        console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
+        // console->warn("Normalized distance should be less than 1.0 since we already select neighbour");
         return 0.;
     }
 }
