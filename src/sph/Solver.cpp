@@ -34,6 +34,7 @@ void Solver::go() {
 }
 
 void Solver::step(bool initial) {
+
     for (auto &part: listPart) {
         double dens = 0;
         double col = 0;
@@ -59,12 +60,13 @@ void Solver::step(bool initial) {
         part->colourLaplacian = colLapl;
         part->pressure = (part->density - part->flu->rho0) * part->flu->k;
     }
+
     for (auto &part: listPart) {
         VEC dist;
         VEC tempPressureForce = {0., 0., 0.};
         VEC tempViscosityForce = {0., 0., 0.};
         VEC tempSurfaceTensionForce = {0., 0., 0.};
-        for (auto &other: listPart) {
+        for (const auto &other: listPart) {
             if (norm(part->curr_pos - other->curr_pos) < smoothing && !(part == other)) {
                 dist = part->curr_pos - other->curr_pos;
                 auto mass_j = part->mass;
@@ -99,11 +101,14 @@ void Solver::step(bool initial) {
         part->next_acc = part->result_force * 1. / part->mass;
         if (initial) {
             part->prev_half_spe = part->curr_spe;
+            part->next_half_spe = part->curr_spe + part->curr_acc * delta_t;
+        } else {
+            part->next_half_spe = part->prev_half_spe + part->curr_acc * delta_t;
         }
-        part->next_half_spe = part->prev_half_spe + part->curr_acc * delta_t;
         part->curr_spe = 0.5 * (part->next_half_spe + part->prev_half_spe);
         part->next_pos = part->curr_pos + part->next_half_spe * delta_t;
     }
+
     for (auto &part: listPart) {
         for (auto f: listConstraints) {
             f.react(part, delta_t);
@@ -115,4 +120,3 @@ void Solver::step(bool initial) {
         part->curr_pos = part->next_pos;
     }
 }
-

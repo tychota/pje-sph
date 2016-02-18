@@ -13,7 +13,6 @@
 #include <vector>
 #include <memory>
 
-
 #include "utils/macros.hpp"
 #include "kernel/Kernel.hpp"
 
