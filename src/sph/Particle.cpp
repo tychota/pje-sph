@@ -9,6 +9,7 @@ Particle::Particle(double r,
                    shared_ptr<KernelSpiky> pKern,
                    shared_ptr<KernelViscosity> vKern,
                    shared_ptr<KernelPoly6> sKern,
+                   int id,
                    VEC pos,
                    VEC spe,
                    VEC acc):
@@ -30,7 +31,7 @@ Particle::Particle(double r,
         curr_acc(acc),
         next_acc(acc),
         ext_forces(f),
-        uuid(sole::uuid4())
+        id(id)
 { }
 
 Particle::Particle(double r,
@@ -39,7 +40,8 @@ Particle::Particle(double r,
                    shared_ptr<KernelPoly6> fKern,
                    shared_ptr<KernelSpiky> pKern,
                    shared_ptr<KernelViscosity> vKern,
-                   shared_ptr<KernelPoly6> sKern) : Particle(r, flu, f, fKern, pKern, vKern, sKern, vn, vn, vn) { };
+                   shared_ptr<KernelPoly6> sKern,
+                   int id) : Particle(r, flu, f, fKern, pKern, vKern, sKern, id, vn, vn, vn) { };
 
 void Particle::updateField(std::vector<std::shared_ptr<Particle>> neighb) {
     double dens = 0;

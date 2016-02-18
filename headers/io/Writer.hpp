@@ -8,6 +8,8 @@
 #include "sph/Particle.hpp"
 
 class Writer {
+  public:
+    Writer() {};
     virtual void write(vector<Particle>& partList, int step);
 };
 

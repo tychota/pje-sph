@@ -8,6 +8,7 @@ class Box : public Solid {
     double implicitFunction(VEC pos);
     VEC localCoord(VEC pos);
     VEC globalCoord(VEC localCoord);
+    VEC localRange() {return extendAxis;};
     void react(Particle& part, double delta_t);
   private:
     VEC center;

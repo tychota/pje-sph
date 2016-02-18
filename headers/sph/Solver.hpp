@@ -4,6 +4,8 @@
 #include <vector>
 #include <functional>
 
+#include "io/Writer.hpp"
+#include "io/TextWriter.hpp"
 #include "solid/Solid.hpp"
 #include "solid/Box.hpp"
 #include "sph/Particle.hpp"
@@ -27,7 +29,9 @@ class Solver {
     void go();
     void step(bool initial);
 
+    Box domain;
   private:
+    TextWriter save;
     double smoothing;
     double delta_t;
     int number_frames;
@@ -35,7 +39,6 @@ class Solver {
 
     vector<Particle> listPart;
 
-    Box domain;
     vector<Solid> listConstraints;
 };
 

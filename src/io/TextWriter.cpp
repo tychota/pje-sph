@@ -55,9 +55,9 @@ void TextWriter::write(vector<Particle> &partList, int step) {
     mf << endl;
 
     for (auto& part: partList) {
-        mf << "pos x" << "\t";
-        mf << "pos y" << "\t";
-        mf << "pos z" << "\t";
+        mf << part.curr_pos[0] << "\t";
+        mf << part.curr_pos[1] << "\t";
+        mf << part.curr_pos[2] << "\t";
         
         mf << part.density<< "\t";
         mf << part.pressure << "\t";

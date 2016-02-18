@@ -15,7 +15,6 @@
 #include <vector>
 #include <armadillo>
 
-#include "sole/sole.hpp"
 #include "utils/macros.hpp"
 #include "kernel/Kernel.hpp"
 #include "kernel/KernelPoly6.hpp"
@@ -48,6 +47,7 @@ struct Particle {
              shared_ptr<KernelSpiky> pKern,
              shared_ptr<KernelViscosity> vKern,
              shared_ptr<KernelPoly6> sKern,
+             int id,
              VEC pos,
              VEC spe,
              VEC acc);
@@ -57,7 +57,8 @@ struct Particle {
              shared_ptr<KernelPoly6> fKern,
              shared_ptr<KernelSpiky> pKern,
              shared_ptr<KernelViscosity> vKern,
-             shared_ptr<KernelPoly6> sKern);
+             shared_ptr<KernelPoly6> sKern,
+             int id);
 
     void updateField(vector<shared_ptr<Particle>> neighb);
     void updateForce(vector<shared_ptr<Particle>> neighb);
@@ -104,13 +105,13 @@ struct Particle {
     VEC viscosity_force;
     VEC surfaceTension_force;
 
-    sole::uuid uuid;
+    int id;
 };
 
 inline bool operator<(const Particle& lhs, const Particle& rhs) {
-    return lhs.uuid < rhs.uuid;
+    return lhs.id < rhs.id;
 }
 
 inline bool operator==(const Particle& lhs, const Particle& rhs) {
-    return lhs.uuid == rhs.uuid;
+    return lhs.id == rhs.id;
 }

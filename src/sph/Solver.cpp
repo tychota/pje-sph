@@ -10,7 +10,9 @@ Solver::Solver(double deltat_t,
         delta_t(deltat_t),
         number_frames(number_frames),
         steps_per_frame(steps_per_frame),
-        domain(domain) { }
+        domain(domain),
+        save()
+{ }
 
 void Solver::addConstraint(Solid constraint) {
     listConstraints.push_back(constraint);
@@ -25,7 +27,7 @@ void Solver::go() {
     step(true);
     for (int i = 1; i <= number_frames * steps_per_frame; i++) {
         if (i % steps_per_frame) {
-
+            save.write(listPart, i);
         }
         step(false);
     }

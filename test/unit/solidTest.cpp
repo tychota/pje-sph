@@ -57,7 +57,7 @@ TEST_CASE( "Box collison is working" ) {
         VEC v1 = {1., 1., 1.};
         Box b1(0.2, SolidType::Recipient, v0, v0, v1);
 
-        Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
+        Fluid fluid1(1000, 0.001, 0.2, 2, 0.1, 0.7);
         shared_ptr<Fluid> f1 = make_shared<Fluid>(fluid1);
         VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
@@ -68,7 +68,7 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6, 1);
 
         p1.next_pos = {0.5, 0.5, 1.1};
         p1.next_spe = {1, 1, 1};
@@ -90,7 +90,7 @@ TEST_CASE( "Box collison is working" ) {
         VEC v1 = {1., 1., 1.};
         Box b1(0.2, SolidType::Recipient, v0, v0, v1);
 
-        Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
+        Fluid fluid1(1000, 0.001, 0.2, 2, 0.1, 0.7);
         shared_ptr<Fluid> f1 = make_shared<Fluid>(fluid1);
         VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
@@ -101,7 +101,7 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6, 1);
 
         p1.next_pos = {0.5, 0.5, -1.1};
         p1.next_spe = {-1, -1, -1};
@@ -123,7 +123,7 @@ TEST_CASE( "Box collison is working" ) {
         VEC v1 = {2., 2., 2.};
         Box b1(0.2, SolidType::Recipient, v0, v0, v1);
 
-        Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
+        Fluid fluid1(1000, 0.001, 0.2, 2, 0.1, 0.7);
         shared_ptr<Fluid> f1 = make_shared<Fluid>(fluid1);
         VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
@@ -134,7 +134,7 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        Particle p1 =Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 =Particle(0.1, f1, lf, kp6, ksp, kv, kp6, 1);
 
         p1.next_pos = {0.5, 0.5, -2.1};
         p1.next_spe = {-1, -1, -1};
@@ -153,7 +153,7 @@ TEST_CASE( "Box collison is working" ) {
         VEC v1 = {2., 2., 2.};
         Box b1(0.2, SolidType::Recipient, v0, vr, v1);
 
-        Fluid fluid1(1000, 0.1, 0.001, 0.2, 2, 0.1, 0.7);
+        Fluid fluid1(1000, 0.001, 0.2, 2, 0.1, 0.7);
         shared_ptr<Fluid> f1 = make_shared<Fluid>(fluid1);
         VEC g = {0, 0, -9.8};
         shared_ptr<Force> gravity = make_shared<Force>(g);
@@ -164,7 +164,7 @@ TEST_CASE( "Box collison is working" ) {
         shared_ptr<KernelSpiky> ksp = make_shared<KernelSpiky>(0.2);
         shared_ptr<KernelViscosity> kv = make_shared<KernelViscosity>(0.2);
 
-        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6);
+        Particle p1 = Particle(0.1, f1, lf, kp6, ksp, kv, kp6, 1);
 
         p1.next_pos = {0.5, 1.5, -2.1};
         p1.next_spe = {-1, -1, -1};

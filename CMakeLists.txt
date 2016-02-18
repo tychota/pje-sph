@@ -56,7 +56,7 @@ ADD_LIBRARY(PJEException
         headers/exception/NotImplementedException.hpp)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJEIo PJESolid PJESph PJECommon PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEKernel PJEException PJEIo )
 
 ADD_EXECUTABLE(tests
         test/main.cpp
@@ -66,4 +66,4 @@ ADD_EXECUTABLE(tests
         test/unit/kernelTest.cpp
         test/unit/particleTest.cpp
         test/unit/solidTest.cpp)
-TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJEIo PJESolid PJESph PJECommon PJEKernel PJEException )
+TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEKernel PJEException PJEIo )
