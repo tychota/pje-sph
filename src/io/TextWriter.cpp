@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "io/TextWriter.hpp"
 
 void TextWriter::write(const vector<shared_ptr<Particle>>& partList, int step) {
@@ -10,6 +11,8 @@ void TextWriter::write(const vector<shared_ptr<Particle>>& partList, int step) {
 
     mf << "id" << "\t";
 
+    mf << setprecision(4);
+
     mf << "pos x" << "\t";
     mf << "pos y" << "\t";
     mf << "pos z" << "\t";
@@ -17,8 +20,8 @@ void TextWriter::write(const vector<shared_ptr<Particle>>& partList, int step) {
     mf << "densi" << "\t";
     mf << "press" << "\t";
 
-    mf << "col" << "\t";
-    mf << "gcol n" << "\t";
+    mf << "colo" << "\t";
+    mf << "gcoln" << "\t";
     mf << "lcol" << "\t";
 
     mf << "spe x" << "\t";

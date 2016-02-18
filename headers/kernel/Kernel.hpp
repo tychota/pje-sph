@@ -2,9 +2,9 @@
 
 #include <armadillo>
 #include "utils/macros.hpp"
-#include "spdlog/spdlog.h"
 #include "exception/NotImplementedException.hpp"
 
+#include "spdlog/spdlog.h"
 using namespace spdlog;
 using namespace arma;
 using namespace std;

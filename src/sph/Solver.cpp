@@ -2,10 +2,9 @@
 Solver::Solver(double deltat_t,
                int number_frames,
                int steps_per_frame,
-               int64_t number_particles,
-               double smoothing,
+               double part_radius,
                Box domain) :
-        smoothing(smoothing),
+        smoothing(6 * part_radius),
         delta_t(deltat_t),
         number_frames(number_frames),
         steps_per_frame(steps_per_frame),
@@ -24,8 +23,10 @@ void Solver::append(shared_ptr<Particle> part) {
 
 void Solver::go() {
     save.write(listPart, 0);
+    console->info("<SOLV> First part of the resolution");
     step(true);
     for (int i = 1; i <= number_frames * steps_per_frame; i++) {
+        console->info("<SOLV> Step n°{} over {} of the resolution", i, number_frames * steps_per_frame);
         if (i % steps_per_frame == 0) {
             save.write(listPart, i);
         }
@@ -34,7 +35,7 @@ void Solver::go() {
 }
 
 void Solver::step(bool initial) {
-
+    console->info("<SOLV> --> Calculate density, pressure and colour");
     for (auto &part: listPart) {
         double dens = 0;
         double col = 0;
@@ -60,7 +61,7 @@ void Solver::step(bool initial) {
         part->colourLaplacian = colLapl;
         part->pressure = (part->density - part->flu->rho0) * part->flu->k;
     }
-
+    console->info("<SOLV> --> Calculate forces");
     for (auto &part: listPart) {
         VEC dist;
         VEC tempPressureForce = {0., 0., 0.};
@@ -108,7 +109,7 @@ void Solver::step(bool initial) {
         part->curr_spe = 0.5 * (part->next_half_spe + part->prev_half_spe);
         part->next_pos = part->curr_pos + part->next_half_spe * delta_t;
     }
-
+    console->info("<SOLV> --> Check collision.");
     for (auto &part: listPart) {
         for (auto f: listConstraints) {
             f.react(part, delta_t);
@@ -116,7 +117,6 @@ void Solver::step(bool initial) {
         domain.react(part, delta_t);
         part->curr_acc = part->next_acc;
         part->prev_half_spe = part->next_half_spe;
-        part->curr_spe = part->next_spe;
         part->curr_pos = part->next_pos;
     }
 }

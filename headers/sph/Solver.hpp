@@ -10,6 +10,8 @@
 #include "solid/Box.hpp"
 #include "sph/Particle.hpp"
 
+#include "spdlog/spdlog.h"
+using namespace spdlog;
 using namespace arma;
 using namespace std;
 
@@ -18,7 +20,6 @@ class Solver {
     Solver(double deltat_t,
            int number_frames,
            int steps_per_frame,
-           int64_t number_particles,
            double part_radius,
            Box domain);
 
@@ -28,17 +29,18 @@ class Solver {
 
     void go();
     void step(bool initial);
-
-    Box domain;
+    VEC getDomainRange() { return domain.localRange();}
   private:
-    TextWriter save;
     double smoothing;
     double delta_t;
     int number_frames;
     int steps_per_frame;
+    Box domain;
+    TextWriter save;
 
     vector<shared_ptr<Particle>> listPart;
-
     vector<Solid> listConstraints;
+
+    shared_ptr<logger> console = get("console");
 };
 

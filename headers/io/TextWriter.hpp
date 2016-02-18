@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iomanip>
 #include "io/Writer.hpp"
 #include "spdlog/details/format.h"
 
