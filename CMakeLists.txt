@@ -11,16 +11,19 @@ SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -Wall -DNDEBUG")
 
 INCLUDE_DIRECTORIES(
         ${ARMADILLO_INCLUDE_DIRS}
+        ${VTK_USE_FILE}
         headers
         vendors)
 
 ADD_LIBRARY(PJEIo
         src/io/Writer.cpp
         headers/io/Writer.hpp
-        #src/io/VtkWriter.cpp
-        #headers/io/VtkWriter.hpp
         src/io/TextWriter.cpp
-        headers/io/TextWriter.hpp)
+        headers/io/TextWriter.hpp
+        src/io/VtkHDF5Writer.cpp
+        headers/io/VtkHDF5Writer.hpp
+        src/io/hdf5/HDF5PartFile.cpp
+        headers/io/hdf5/HDF5PartFile.hpp)
 
 ADD_LIBRARY(PJESph
         src/sph/Particle.cpp
@@ -57,7 +60,15 @@ ADD_LIBRARY(PJEException
         headers/exception/NotImplementedException.hpp)
 
 ADD_EXECUTABLE(sph main.cpp)
-TARGET_LINK_LIBRARIES(sph ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEKernel PJEException PJEIo )
+TARGET_LINK_LIBRARIES(sph
+        ${ARMADILLO_LIBRARIES}
+        ${VTK_LIBRARIES}
+        PJESolid
+        PJESph
+        PJECommon
+        PJEKernel
+        PJEException
+        PJEIo)
 
 ADD_EXECUTABLE(tests
         test/main.cpp
@@ -67,4 +78,11 @@ ADD_EXECUTABLE(tests
         test/unit/kernelTest.cpp
         test/unit/particleTest.cpp
         test/unit/solidTest.cpp)
-TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES} PJESolid PJESph PJECommon PJEKernel PJEException PJEIo )
+TARGET_LINK_LIBRARIES(tests ${ARMADILLO_LIBRARIES}
+        ${VTK_LIBRARIES}
+        PJESolid
+        PJESph
+        PJECommon
+        PJEKernel
+        PJEException
+        PJEIo)
